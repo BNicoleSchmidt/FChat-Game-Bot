@@ -10,6 +10,14 @@ function wrapInUserTags(character) {
     return `[user]${character}[/user]`
 }
 
+function boldText(text) {
+    return `[b]${text}[/b]`
+}
+
+function formatCommands(commands) {
+    return commands.map(boldText).join(', ')
+}
+
 function currentPlayersList(channel) {
     const players = playerTracker[channel]
     const plural = players.length !== 1
@@ -45,7 +53,7 @@ function spin(character, channel) {
         sendMSG(channel, `There aren't enough players in the game. 3 players are required in order to spin. ${currentPlayersList(channel)}`)
     } else {
         const eligiblePlayers = playerTracker[channel].filter(c => c !== character)
-        const chosenPlayer = playerTracker[channel][Math.floor(Math.random() * (eligiblePlayers.length)) - 1]
+        const chosenPlayer = eligiblePlayers[Math.floor(Math.random() * (eligiblePlayers.length))]
         sendMSG(channel, `${wrapInUserTags(character)} spins the bottle! It points to... ${wrapInUserTags(chosenPlayer)}!`)
     }
 }
@@ -66,8 +74,8 @@ fchat.on("CON", () => {
     // [session=Truth or Dare, Pie Corner]adh-3d665c7ad3a74fcd1b4b[/session]
     // [session=Bot test - ignore me]adh-34e712245998e51b61e3[/session]
 
-    // fchat.send("JCH", { channel: 'adh-3d665c7ad3a74fcd1b4b' });
-    // fchat.send("JCH", { channel: 'adh-34e712245998e51b61e3' });
+    fchat.send("JCH", { channel: 'adh-3d665c7ad3a74fcd1b4b' });
+    fchat.send("JCH", { channel: 'adh-34e712245998e51b61e3' });
     // fchat.send("JCH", { channel: 'development' });
 })
 
@@ -91,11 +99,12 @@ fchat.on("FLN", ({character}) => {
 
 const joinCommands = ['!yesspin', '!optin', '!join']
 const leaveCommands = ['!nospin', '!optout', '!leave']
-const statusCommands = ['!ready', '!status']
+const statusCommands = ['!ready', '!status', '!players', '!playing']
 const bottleSpinCommands = ['!spin', '!bottle']
+const helpCommands = ['!help', '!commands', '!info']
 
 fchat.on("MSG", ({character, message, channel}) => {
-    const xmessage = message.toLowerCase()
+    const xmessage = message.toLowerCase().trim()
     if (xmessage === 'hey game bot') {
         sendMSG(channel, `Hey yourself, ${wrapInUserTags(character)}!`)
     } else if (joinCommands.includes(xmessage)) {
@@ -106,7 +115,18 @@ fchat.on("MSG", ({character, message, channel}) => {
         spin(character, channel)
     } else if (statusCommands.includes(xmessage)) {
         sendMSG(channel, currentPlayersList(channel))
+    } else if (helpCommands.includes(xmessage)) {
+        sendMSG(channel, `List of available commands:
+        ${formatCommands(joinCommands)}: Join a game
+        ${formatCommands(leaveCommands)}: Leave a game
+        ${formatCommands(bottleSpinCommands)}: Spin the bottle
+        ${formatCommands(statusCommands)}: Check current players
+        ${formatCommands(helpCommands)}: Show this message`)
     }
+})
+
+fchat.onClose(() => {
+    console.log('Connection closed')
 })
 
 fchat.connect(connectionInfo.account, connectionInfo.password, connectionInfo.character);
