@@ -12,7 +12,8 @@ function wrapInUserTags(character) {
 
 function currentPlayersList(channel) {
     const players = playerTracker[channel]
-    return players.length ? `Current players are:\n${players.map(wrapInUserTags).join('\n')}` : 'No one is currently playing.'
+    const plural = players.length !== 1
+    return players.length ? `There ${plural ? 'are' : 'is'} currently ${players.length} player${plural ? 's' : ''}:\n${players.map(wrapInUserTags).join('\n')}` : 'No one is currently playing.'
 }
 
 function sendMSG(channel, message) {
@@ -35,7 +36,7 @@ fchat.on("CON", () => {
     // [session=Truth or Dare, Pie Corner]adh-3d665c7ad3a74fcd1b4b[/session]
     // [session=Bot test - ignore me]adh-34e712245998e51b61e3[/session]
 
-    fchat.send("JCH", { channel: 'adh-3d665c7ad3a74fcd1b4b' });
+    // fchat.send("JCH", { channel: 'adh-3d665c7ad3a74fcd1b4b' });
     // fchat.send("JCH", { channel: 'adh-34e712245998e51b61e3' });
     // fchat.send("JCH", { channel: 'development' });
 })
@@ -49,6 +50,7 @@ fchat.on("JCH", ({channel, character, title}) => {
 
 const joinCommands = ['!yesspin', '!optin', '!join']
 const leaveCommands = ['!nospin', '!optout', '!leave']
+const statusCommands = ['!ready', '!status']
 const bottleSpinCommands = ['!spin', '!bottle']
 
 fchat.on("MSG", ({character, message, channel}) => {
@@ -79,6 +81,8 @@ fchat.on("MSG", ({character, message, channel}) => {
             const chosenPlayer = playerTracker[channel][Math.floor(Math.random() * (eligiblePlayers.length))-1]
             sendMSG(channel, `${wrapInUserTags(character)} spins the bottle! It points to... ${wrapInUserTags(chosenPlayer)}!`)
         }
+    } else if (statusCommands.includes(xmessage)) {
+        sendMSG(channel, currentPlayersList(channel))
     }
 })
 
