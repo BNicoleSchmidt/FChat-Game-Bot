@@ -5,6 +5,7 @@ const connectionInfo = require("./connection_info");
 var fchat = new Fchat(config);
 
 const playerTracker = {}
+const channelTracker = {}
 
 function wrapInUserTags(character) {
     return `[user]${character}[/user]`
@@ -47,14 +48,17 @@ function removePlayer(character, channel, disconnect = false) {
 }
 
 function spin(character, channel) {
+    const channelInfo = channelTracker[channel]
+    const requiredPlayers = channelInfo.preventSpinback ? 4 : 3
     if (!playerTracker[channel].includes(character)) {
         sendMSG(channel, `You can't spin if you aren't playing, ${wrapInUserTags(character)}! Join the game first!`)
-    } else if (playerTracker[channel].length < 3) {
-        sendMSG(channel, `There aren't enough players in the game. 3 players are required in order to spin. ${currentPlayersList(channel)}`)
+    } else if (playerTracker[channel].length < requiredPlayers) {
+        sendMSG(channel, `There aren't enough players in the game. ${requiredPlayers} players are required in order to spin. ${currentPlayersList(channel)}`)
     } else {
-        const eligiblePlayers = playerTracker[channel].filter(c => c !== character)
+        const eligiblePlayers = playerTracker[channel].filter(c => c !== character && (!channelInfo.preventSpinback || c !== channelInfo.lastSpinner))
         const chosenPlayer = eligiblePlayers[Math.floor(Math.random() * (eligiblePlayers.length))]
         sendMSG(channel, `${wrapInUserTags(character)} spins the bottle! It points to... ${wrapInUserTags(chosenPlayer)}!`)
+        channelInfo.lastSpinner = character
     }
 }
 
@@ -83,6 +87,7 @@ fchat.on("JCH", ({channel, character, title}) => {
     if (character.identity === 'Game Bot') {
         console.log('Joined channel', title)
         playerTracker[channel] = []
+        channelTracker[channel] = {preventSpinback: channel.toLowerCase() === 'adh-3d665c7ad3a74fcd1b4b'}
     }
 })
 
@@ -101,6 +106,7 @@ const joinCommands = ['!yesspin', '!optin', '!join']
 const leaveCommands = ['!nospin', '!optout', '!leave']
 const statusCommands = ['!ready', '!status', '!players', '!playing']
 const bottleSpinCommands = ['!spin', '!bottle']
+const spinbackCommands = ['!spinback', '!togglespinback']
 const helpCommands = ['!help', '!commands', '!info']
 
 fchat.on("MSG", ({character, message, channel}) => {
@@ -115,12 +121,17 @@ fchat.on("MSG", ({character, message, channel}) => {
         spin(character, channel)
     } else if (statusCommands.includes(xmessage)) {
         sendMSG(channel, currentPlayersList(channel))
+    } else if (spinbackCommands.includes(xmessage)) {
+        newSetting = !channelTracker[channel].preventSpinback
+        channelTracker[channel].preventSpinback = newSetting
+        sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, `List of available commands:
         ${formatCommands(joinCommands)}: Join a game
         ${formatCommands(leaveCommands)}: Leave a game
         ${formatCommands(bottleSpinCommands)}: Spin the bottle
         ${formatCommands(statusCommands)}: Check current players
+        ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(helpCommands)}: Show this message`)
     }
 })
