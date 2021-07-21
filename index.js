@@ -1,4 +1,4 @@
-const Fchat = require("lib-fchat/lib/Fchat");
+const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
 const connectionInfo = require("./connection_info");
 
@@ -6,6 +6,7 @@ var fchat = new Fchat(config);
 
 const playerTracker = {}
 const channelTracker = {}
+let isAlive = false
 
 function wrapInUserTags(character) {
     return `[user]${character}[/user]`
@@ -140,4 +141,24 @@ fchat.onClose(() => {
     console.log('Connection closed')
 })
 
-fchat.connect(connectionInfo.account, connectionInfo.password, connectionInfo.character);
+fchat.onError(err => {
+    console.log('Error:', err)
+})
+
+async function connect() {
+    await fchat.connect(connectionInfo.account, connectionInfo.password, connectionInfo.character);
+    isAlive = true
+    fchat.socket.on('pong', () => isAlive = true)
+}
+
+setInterval(function ping() {
+    if (isAlive === false) {
+        console.log('Disconnected. Attempting reconnect.')
+        connect()
+    }
+
+    isAlive = false;
+    fchat.socket.ping(() => { });
+}, 30000);
+
+connect()
