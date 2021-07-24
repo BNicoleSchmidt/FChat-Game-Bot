@@ -1,6 +1,6 @@
 const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
-//const connectionInfo = require("./connection_info");
+// const connectionInfo = require("./connection_info");
 const random = require("./random")
 
 var fchat = new Fchat(config);
@@ -102,10 +102,12 @@ fchat.on("CON", () => {
     // [session=Truth or Dare, Pie Corner]adh-3d665c7ad3a74fcd1b4b[/session]
     // [session=Death rolls & Glory hoops]adh-2a38b045be1f83dae9c5[/session]
     // [session=Pokemon Mystery Dungeon]adh-a4369b5fe15561218d9f[/session]
+    // [session=bot test]adh-4fcd7a57444c4b70a961[/session]
 
     fchat.send("JCH", { channel: 'adh-3d665c7ad3a74fcd1b4b' });
     fchat.send("JCH", { channel: 'adh-2a38b045be1f83dae9c5' });
     fchat.send("JCH", { channel: 'adh-a4369b5fe15561218d9f' });
+    // fchat.send("JCH", { channel: 'adh-4fcd7a57444c4b70a961' });
     // fchat.send("JCH", { channel: 'development' });
 })
 
