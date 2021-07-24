@@ -1,6 +1,7 @@
 const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
 const connectionInfo = require("./connection_info");
+const random = require("./random")
 
 var fchat = new Fchat(config);
 
@@ -15,6 +16,10 @@ function wrapInUserTags(character) {
 
 function boldText(text) {
     return `[b]${text}[/b]`
+}
+
+function color(text, color) {
+    return `[color=${color}]${text}[/color]`
 }
 
 function formatCommands(commands) {
@@ -58,6 +63,10 @@ function removePlayer(character, channel, disconnect = false) {
     }
 }
 
+function getRandom(options) {
+    return options[Math.floor(Math.random() * (options.length))]
+}
+
 function spin(character, channel) {
     const channelInfo = channelTracker[channel]
     const requiredPlayers = channelInfo.preventSpinback ? 4 : 3
@@ -67,10 +76,14 @@ function spin(character, channel) {
         sendMSG(channel, `There aren't enough players in the game. ${requiredPlayers} players are required in order to spin. ${currentPlayersCount(channel)}`)
     } else {
         const eligiblePlayers = playerTracker[channel].filter(c => c !== character && (!channelInfo.preventSpinback || c !== channelInfo.lastSpinner))
-        const chosenPlayer = eligiblePlayers[Math.floor(Math.random() * (eligiblePlayers.length))]
+        const chosenPlayer = getRandom(eligiblePlayers)
         sendMSG(channel, `${wrapInUserTags(character)} spins the bottle! It points to... ${wrapInUserTags(chosenPlayer)}!`)
         channelInfo.lastSpinner = character
     }
+}
+
+function getRandomItem(category) {
+    return getRandom(random[category])
 }
 
 fchat.onOpen(ticket => {
@@ -87,10 +100,12 @@ fchat.on("ERR", event => {
 
 fchat.on("CON", () => {
     // [session=Truth or Dare, Pie Corner]adh-3d665c7ad3a74fcd1b4b[/session]
-    // [session=Bot test - ignore me]adh-34e712245998e51b61e3[/session]
+    // [session=Death rolls & Glory hoops]adh-2a38b045be1f83dae9c5[/session]
+    // [session=Pokemon Mystery Dungeon]adh-a4369b5fe15561218d9f[/session]
 
     fchat.send("JCH", { channel: 'adh-3d665c7ad3a74fcd1b4b' });
-    fchat.send("JCH", { channel: 'adh-34e712245998e51b61e3' });
+    fchat.send("JCH", { channel: 'adh-2a38b045be1f83dae9c5' });
+    fchat.send("JCH", { channel: 'adh-a4369b5fe15561218d9f' });
     // fchat.send("JCH", { channel: 'development' });
 })
 
@@ -117,10 +132,11 @@ fchat.on("FLN", ({ character }) => {
 
 const joinCommands = ['!yesspin', '!optin', '!join']
 const leaveCommands = ['!nospin', '!optout', '!leave']
-const statusCommands = ['!ready', '!status', '!players', '!playing']
+const statusCommands = ['!ready', '!status', '!players', '!playing', '!list']
 const bottleSpinCommands = ['!spin', '!bottle']
 const spinbackCommands = ['!spinback', '!togglespinback']
 const helpCommands = ['!help', '!commands', '!info']
+const randomItemCommands = ['!food', '!berry', '!drink']
 
 fchat.on("MSG", ({ character, message, channel }) => {
     const xmessage = message.toLowerCase().trim()
@@ -141,12 +157,15 @@ fchat.on("MSG", ({ character, message, channel }) => {
         newSetting = !channelTracker[channel].preventSpinback
         channelTracker[channel].preventSpinback = newSetting
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
+    } else if (randomItemCommands.includes(xmessage)) {
+        sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, `List of available commands:
         ${formatCommands(joinCommands)}: Join a game
         ${formatCommands(leaveCommands)}: Leave a game
         ${formatCommands(bottleSpinCommands)}: Spin the bottle
         ${formatCommands(statusCommands)}: Check current players
+        ${formatCommands(randomItemCommands)}: Produce a random item from the given category
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(helpCommands)}: Show this message`)
     }
@@ -167,13 +186,17 @@ async function connect() {
 }
 
 setInterval(function ping() {
-    if (isAlive === false) {
-        console.log('Disconnected. Attempting reconnect.')
-        connect()
-    }
+    try {
+        if (isAlive === false) {
+            console.log('Disconnected. Attempting reconnect.')
+            connect()
+        }
 
-    isAlive = false;
-    fchat.socket.ping(() => { });
+        isAlive = false;
+        fchat.socket.ping(() => { });
+    } catch (err) {
+        console.log(err)
+    }
 }, 30000);
 
 setInterval(function send() {
