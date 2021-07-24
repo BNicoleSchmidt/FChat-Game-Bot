@@ -1,6 +1,6 @@
 const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
-const connectionInfo = require("./connection_info");
+//const connectionInfo = require("./connection_info");
 const random = require("./random")
 
 var fchat = new Fchat(config);
@@ -180,7 +180,7 @@ fchat.onError(err => {
 })
 
 async function connect() {
-    await fchat.connect(connectionInfo.account, connectionInfo.password, connectionInfo.character);
+    await fchat.connect(process.env.ACCOUNT, process.env.PASSWORD, process.env.CHARACTER);
     isAlive = true
     fchat.socket.on('pong', () => isAlive = true)
 }
