@@ -53,7 +53,14 @@
         "mango",
         "bowl of Thai curry",
         "plate of schnitzel with noodles",
-        "pan of pierogies"
+        "pan of pierogies",
+        "hard shell taco",
+        "soft shell taco",
+        "gigantic wedding cake",
+        "macaron",
+        "macaroon",
+        "slice of New York cheesecake",
+        "cream pie"
     ],
     "!berry": [
         "Aguav berry",
@@ -192,7 +199,21 @@
         "potion of blindness",
         "potion of paralysis",
         "potion of x-ray vision",
-        "potion of growth"
+        "potion of growth",
+        "potion of shrinking",
+        "potion of endurance",
+        "potion of confusion",
+        "potion of sleep",
+        "potion of deafness",
+        "potion of muteness",
+        "potion of youth",
+        "potion of aging",
+        "potion of amnesia",
+        "potion of fire breathing",
+        "potion of ice breathing",
+        "potion of cloning",
+        "potion of random transformation",
+        "potion of placebo"
     ],
     "!toy": [
         "canine dildo with a knot",
@@ -202,9 +223,9 @@
         "human pussy fleshlight",
         "canine spade fleshlight",
         "human mouth fleshlight",
-        "anus fleshlight",
+        "tight anus fleshlight",
         "big boob pillow",
-        "anime schoolgirl body pillow",
+        "hentai schoolgirl body pillow",
         "rubber cockring",
         "string of anal beads",
         "vibrating egg",
@@ -212,7 +233,13 @@
         "hitachi wand",
         "buttplug",
         "conical training dildo",
-        "vibrating silicone cockring"
+        "vibrating silicone cockring",
+        "strap-on dildo",
+        "candle and matches",
+        "leather whip",
+        "cat o'nine tails",
+        "pair of ben wa balls",
+        "wooden paddle"
     ],
     "!bondage": [
         "pair of wrist cuffs",
@@ -227,6 +254,10 @@
         "blindfold",
         "muzzle",
         "chastity belt",
-        "metal cockring"
+        "metal cockring",
+        "set of arm binders",
+        "set of leg binders",
+        "corset",
+        "sensory deprivation hood"
     ]
 }
