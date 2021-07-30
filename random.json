@@ -48,7 +48,12 @@
         "chili dog",
         "hot dog",
         "sushi tray",
-        "rice ball"
+        "rice ball",
+        "20-piece Chicken McNuggets",
+        "mango",
+        "bowl of Thai curry",
+        "plate of schnitzel with noodles",
+        "pan of pierogies"
     ],
     "!berry": [
         "Aguav berry",
@@ -164,7 +169,7 @@
         "sin cyn",
         "grasshopper",
         "Red Bull",
-        "red horse",
+        "Red Horse",
         "pale ale",
         "Boston lager",
         "shot of Irish whiskey",
@@ -173,5 +178,55 @@
         "cup of earl grey",
         "glass of iced tea",
         "lemonade"
+    ],
+    "!potion": [
+        "potion of lust",
+        "potion of strength",
+        "potion of enfeeblement",
+        "potion of gender swapping",
+        "potion of submission",
+        "potion of dominance",
+        "potion of phasing",
+        "potion of bioluminescence",
+        "potion of invisibility",
+        "potion of blindness",
+        "potion of paralysis",
+        "potion of x-ray vision",
+        "potion of growth"
+    ],
+    "!toy": [
+        "canine dildo with a knot",
+        "dragon dildo",
+        "tentacle dildo",
+        "horse dildo",
+        "human pussy fleshlight",
+        "canine spade fleshlight",
+        "human mouth fleshlight",
+        "anus fleshlight",
+        "big boob pillow",
+        "anime schoolgirl body pillow",
+        "rubber cockring",
+        "string of anal beads",
+        "vibrating egg",
+        "jackrabbit vibrator",
+        "hitachi wand",
+        "buttplug",
+        "conical training dildo",
+        "vibrating silicone cockring"
+    ],
+    "!bondage": [
+        "pair of wrist cuffs",
+        "leather collar and leash",
+        "pair of fishnet leggings",
+        "set of nipple clamps",
+        "ball gag",
+        "ring gag",
+        "spreader bar",
+        "pair of ankle cuffs",
+        "length of silk rope",
+        "blindfold",
+        "muzzle",
+        "chastity belt",
+        "metal cockring"
     ]
 }
