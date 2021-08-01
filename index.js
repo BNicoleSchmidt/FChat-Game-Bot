@@ -139,6 +139,7 @@ const bottleSpinCommands = ['!spin', '!bottle']
 const spinbackCommands = ['!spinback', '!togglespinback']
 const helpCommands = ['!help', '!commands', '!info']
 const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!toy', '!bondage']
+const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
 
 fchat.on("MSG", ({ character, message, channel }) => {
     const xmessage = message.toLowerCase().trim()
@@ -150,6 +151,8 @@ fchat.on("MSG", ({ character, message, channel }) => {
         removePlayer(character, channel)
     } else if (bottleSpinCommands.includes(xmessage)) {
         spin(character, channel)
+    } else if (coinCommands.includes(xmessage)) {
+        sendMSG(channel, `${wrapInUserTags(character)} flips a coin! It comes up ${color(getRandom(['Heads!', 'Tails!']), 'blue')}`)
     } else if (statusCommands.includes(xmessage)) {
         sendMSG(channel, currentPlayersCount(channel))
         if (playerTracker[channel].length) {
@@ -166,6 +169,7 @@ fchat.on("MSG", ({ character, message, channel }) => {
         ${formatCommands(joinCommands)}: Join a game
         ${formatCommands(leaveCommands)}: Leave a game
         ${formatCommands(bottleSpinCommands)}: Spin the bottle
+        ${formatCommands(coinCommands)}: Flip a coin
         ${formatCommands(statusCommands)}: Check current players
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
