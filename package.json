@@ -23,6 +23,9 @@
   "author": "BNicoleSchmidt",
   "license": "ISC",
   "dependencies": {
-    "lib-fchat": "^1.3.3"
+    "knex": "^0.21.19",
+    "lib-fchat": "^1.3.3",
+    "objection": "^2.2.15",
+    "pg": "^8.6.0"
   }
 }

@@ -1,12 +1,81 @@
 const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
-// const connectionInfo = require("./connection_info");
-const random = require("./random")
+const random = require("./random");
+const { Model } = require('objection');
+
+class Player extends Model {
+    static get tableName() {
+        return 'players'
+    }
+}
+
+class Item extends Model {
+    static get tableName() {
+        return 'items'
+    }
+}
+
+class Mod extends Model {
+    static get tableName() {
+        return 'mods'
+    }
+}
+
+class Channel extends Model {
+    static get tableName() {
+        return 'channels';
+    }
+
+    static get relationMappings() {
+        return {
+            players: {
+                relation: Model.HasManyRelation,
+                modelClass: Player,
+                join: {
+                    from: 'channels.id',
+                    to: 'players.channel_id'
+                }
+            },
+            mods: {
+                relation: Model.HasManyRelation,
+                modelClass: Mod,
+                join: {
+                    from: 'channels.id',
+                    to: 'mods.channel_id'
+                }
+            }
+        }
+    }
+}
+
+const db_url = process.env.DATABASE_URL
+var db_url_groups = db_url.match(/^.*\/\/(.*):(.*)@(.*):.*\/(.*)$/)
+var dbUser = db_url_groups[1]
+var dbPw = db_url_groups[2]
+var dbHost = db_url_groups[3]
+var db = db_url_groups[4]
+
+const dbInfo = {
+    client: 'pg',
+    useNullAsDefault: true,
+    connection: {
+        host: `${dbHost}`,
+        user: `${dbUser}`,
+        password: `${dbPw}`,
+        database: `${db}`,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    }
+}
+
+const Knex = require('knex');
+
+const knex = Knex(dbInfo);
+Model.knex(knex);
 
 var fchat = new Fchat(config);
 
-const playerTracker = {}
-const channelTracker = {}
 const messageQueue = []
 let isAlive = false
 
@@ -27,14 +96,13 @@ function formatCommands(commands) {
 }
 
 function currentPlayersCount(channel) {
-    const players = playerTracker[channel]
+    const players = channel.players
     const plural = players.length !== 1
     return players.length ? `There ${plural ? 'are' : 'is'} currently ${players.length} player${plural ? 's' : ''}.` : 'No one is currently playing.'
 }
 
 function currentPlayersList(channel) {
-    const players = playerTracker[channel]
-    return `Current players in ${channelTracker[channel].title}: \n${players.map(wrapInUserTags).join('\n')}`
+    return `Current players in ${channel.title}: \n${channel.players.map(p => wrapInUserTags(p.character)).join('\n')}`
 }
 
 function sendMSG(channel, message) {
@@ -45,19 +113,23 @@ function sendPRI(recipient, message) {
     messageQueue.push({ code: 'PRI', payload: { recipient, message } })
 }
 
-function addPlayer(character, channel) {
-    if (!playerTracker[channel].includes(character)) {
-        playerTracker[channel].push(character)
-        sendMSG(channel, `${wrapInUserTags(character)} has joined the game! ${currentPlayersCount(channel)}`)
+async function addPlayer(character, channel) {
+    const players = (await Player.query().where('channel_id', channel)).map(p => p.character)
+    if (!players.includes(character)) {
+        await Player.query().insert({ character, channel_id: channel }).returning(['character'])
+        const channelInfo = await Channel.query().findById(channel).withGraphFetched('players')
+        sendMSG(channel, `${wrapInUserTags(character)} has joined the game! ${currentPlayersCount(channelInfo)}`)
     } else {
         sendMSG(channel, `You're already in the game, ${wrapInUserTags(character)}!`)
     }
 }
 
-function removePlayer(character, channel, disconnect = false) {
-    if (playerTracker[channel].includes(character)) {
-        playerTracker[channel] = playerTracker[channel].filter(c => c !== character)
-        sendMSG(channel, `${wrapInUserTags(character)} has left the game. ${currentPlayersCount(channel)}`)
+async function removePlayer(character, channel, disconnect = false) {
+    const players = (await Player.query().where('channel_id', channel)).map(p => p.character)
+    if (players.includes(character)) {
+        await Player.query().where('character', character).where('channel_id', channel).delete()
+        const channelInfo = await Channel.query().findById(channel).withGraphFetched('players')
+        sendMSG(channel, `${wrapInUserTags(character)} has left the game. ${currentPlayersCount(channelInfo)}`)
     } else if (!disconnect) {
         sendMSG(channel, `You're already not in the game, ${wrapInUserTags(character)}.`)
     }
@@ -67,18 +139,19 @@ function getRandom(options) {
     return options[Math.floor(Math.random() * (options.length))]
 }
 
-function spin(character, channel) {
-    const channelInfo = channelTracker[channel]
-    const requiredPlayers = channelInfo.preventSpinback ? 4 : 3
-    if (!playerTracker[channel].includes(character)) {
+async function spin(character, channel) {
+    const channelInfo = await Channel.query().findById(channel).withGraphFetched('players')
+    const players = channelInfo.players.map(p => p.character)
+    const requiredPlayers = channelInfo.spinback ? 4 : 3
+    if (!players.includes(character)) {
         sendMSG(channel, `You can't spin if you aren't playing, ${wrapInUserTags(character)}! Join the game first!`)
-    } else if (playerTracker[channel].length < requiredPlayers) {
-        sendMSG(channel, `There aren't enough players in the game. ${requiredPlayers} players are required in order to spin. ${currentPlayersCount(channel)}`)
+    } else if (players.length < requiredPlayers) {
+        sendMSG(channel, `There aren't enough players in the game. ${requiredPlayers} players are required in order to spin. ${currentPlayersCount(channelInfo)}`)
     } else {
-        const eligiblePlayers = playerTracker[channel].filter(c => c !== character && (!channelInfo.preventSpinback || c !== channelInfo.lastSpinner))
+        const eligiblePlayers = players.filter(c => c !== character && (!channelInfo.spinback || c !== channelInfo.last_spinner))
         const chosenPlayer = getRandom(eligiblePlayers)
         sendMSG(channel, `${wrapInUserTags(character)} spins the bottle! It points to... ${wrapInUserTags(chosenPlayer)}!`)
-        channelInfo.lastSpinner = character
+        await Channel.query().findById(channel).update({last_spinner: character})
     }
 }
 
@@ -98,37 +171,31 @@ fchat.on("ERR", event => {
     console.log('ERR', event)
 })
 
-fchat.on("CON", () => {
-    // [session=Truth or Dare, Pie Corner]adh-3d665c7ad3a74fcd1b4b[/session]
-    // [session=Death rolls & Glory hoops]adh-2a38b045be1f83dae9c5[/session]
-    // [session=Pokemon Mystery Dungeon]adh-a4369b5fe15561218d9f[/session]
-    // [session=bot test]adh-4fcd7a57444c4b70a961[/session]
-
-    fchat.send("JCH", { channel: 'adh-3d665c7ad3a74fcd1b4b' });
-    fchat.send("JCH", { channel: 'adh-2a38b045be1f83dae9c5' });
-    fchat.send("JCH", { channel: 'adh-a4369b5fe15561218d9f' });
-    // fchat.send("JCH", { channel: 'adh-4fcd7a57444c4b70a961' });
-    // fchat.send("JCH", { channel: 'development' });
+fchat.on("CON", async () => {
+    const channels = await Channel.query()
+    for (const channel of channels) {
+        fchat.send('JCH', { channel: channel.id })
+    }
 })
 
-fchat.on("JCH", ({ channel, character, title }) => {
+fchat.on("JCH", async ({ channel, character, title }) => {
     if (character.identity === 'Game Bot') {
         console.log('Joined channel', title)
-        if (!Object.keys(channelTracker).includes(channel)) {
-            playerTracker[channel] = []
-            channelTracker[channel] = { preventSpinback: true, title }
+        const existing = await Channel.query().findById(channel)
+        if (!existing) {
+            await Channel.query().insert({id: channel, title, spinback: true})
         }
     }
 })
 
-fchat.on("LCH", ({ channel, character }) => {
-    removePlayer(character, channel, true)
+fchat.on("LCH", async ({ channel, character }) => {
+    await removePlayer(character, channel, true)
 })
 
-fchat.on("FLN", ({ character }) => {
-    const allChannels = Object.keys(playerTracker)
-    for (const channel of allChannels) {
-        removePlayer(character, channel, true)
+fchat.on("FLN", async ({ character }) => {
+    const channels = (await Player.query().where('character', character)).map(p => p.channel_id)
+    for (const channel of channels) {
+        await removePlayer(character, channel, true)
     }
 })
 
@@ -141,26 +208,28 @@ const helpCommands = ['!help', '!commands', '!info']
 const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!toy', '!bondage']
 const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
 
-fchat.on("MSG", ({ character, message, channel }) => {
+fchat.on("MSG", async ({ character, message, channel }) => {
     const xmessage = message.toLowerCase().trim()
-    if (xmessage === 'hey game bot') {
+    if (xmessage.includes('hey game bot')) {
         sendMSG(channel, `Hey yourself, ${wrapInUserTags(character)}!`)
     } else if (joinCommands.includes(xmessage)) {
-        addPlayer(character, channel)
+        await addPlayer(character, channel)
     } else if (leaveCommands.includes(xmessage)) {
-        removePlayer(character, channel)
+        await removePlayer(character, channel)
     } else if (bottleSpinCommands.includes(xmessage)) {
-        spin(character, channel)
+        await spin(character, channel)
     } else if (coinCommands.includes(xmessage)) {
-        sendMSG(channel, `${wrapInUserTags(character)} flips a coin! It comes up ${color(getRandom(['Heads!', 'Tails!']), 'blue')}`)
+        sendMSG(channel, `${wrapInUserTags(character)} flips a coin! It comes up ${boldText(color(getRandom(['heads!', 'tails!']), 'blue'))}`)
     } else if (statusCommands.includes(xmessage)) {
-        sendMSG(channel, currentPlayersCount(channel))
-        if (playerTracker[channel].length) {
-            sendPRI(character, currentPlayersList(channel))
+        const existingChannel = await Channel.query().findById(channel).withGraphFetched('players')
+        sendMSG(channel, currentPlayersCount(existingChannel))
+        if (existingChannel.players.length) {
+            sendPRI(character, currentPlayersList(existingChannel))
         }
     } else if (spinbackCommands.includes(xmessage)) {
-        newSetting = !channelTracker[channel].preventSpinback
-        channelTracker[channel].preventSpinback = newSetting
+        const existing = await Channel.query().findById(channel)
+        newSetting = !existing.spinback
+        await Channel.query().findById(channel).update({spinback: newSetting})
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (randomItemCommands.includes(xmessage)) {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
