@@ -233,6 +233,31 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (randomItemCommands.includes(xmessage)) {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
+    } else if (xmessage.startsWith('!roll')) {
+        const dice = xmessage.substr(5)
+        let count = 1
+        let sides
+        if (dice.includes('d')) {
+            count = parseInt(dice.split('d')[0], 10)
+            sides = parseInt(dice.split('d')[1], 10)
+        } else {
+            sides = parseInt(dice, 10)
+        }
+        if (isNaN(count) || isNaN(sides) || count <= 0 || sides <= 0) {
+            sendMSG(channel, 'What?')
+        } else {
+            let result
+            if (count === 1) {
+                result = Math.floor(Math.random() * sides) + 1
+            } else {
+                const rolls = []
+                for (let i = 0; i < count; i++) {
+                    rolls.push(Math.floor(Math.random() * sides) + 1)
+                }
+                result = `${rolls.join(' ')} = ${rolls.reduce((a, b) => a + b, 0)}`
+            }
+            sendMSG(channel, `${wrapInUserTags(character)} rolls the dice: ${boldText(result)}`)
+        }
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, `List of available commands:
         ${formatCommands(joinCommands)}: Join a game
