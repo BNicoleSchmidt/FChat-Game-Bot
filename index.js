@@ -235,6 +235,10 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
     } else if (xmessage.startsWith('!roll')) {
         const dice = xmessage.substr(5)
+        if (dice.includes('rick')) {
+            sendMSG(channel, `${wrapInUserTags(character)} rolls the Rick: [url=https://www.youtube.com/watch?v=dQw4w9WgXcQ]Roll[/url] [eicon]rickroll[/eicon]`)
+            return
+        }
         let count = 1
         let sides
         if (dice.includes('d')) {
@@ -245,6 +249,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         }
         if (isNaN(count) || isNaN(sides) || count <= 0 || sides <= 0) {
             sendMSG(channel, 'What?')
+        } else if (count > 20) {
+            sendMSG(channel, "That's too many dice. No.")
         } else {
             let result
             if (count === 1) {
@@ -256,7 +262,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
                 }
                 result = `${rolls.join(' ')} = ${rolls.reduce((a, b) => a + b, 0)}`
             }
-            sendMSG(channel, `${wrapInUserTags(character)} rolls the dice: ${boldText(result)}`)
+            sendMSG(channel, `${wrapInUserTags(character)} rolls ${count}d${sides}: ${boldText(result)}`)
         }
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, `List of available commands:
