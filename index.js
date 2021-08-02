@@ -219,7 +219,7 @@ function deathRoll(message, character, channel) {
     } else if (deathRollTracker[channel]) {
         performDeathRoll(deathRollTracker[channel], character, channel)
     } else {
-        sendMSG('There is no Death Roll in progess. Please provide a starting number.')
+        sendMSG(channel, 'There is no Death Roll in progess. Please provide a starting number.')
     }
 }
 
