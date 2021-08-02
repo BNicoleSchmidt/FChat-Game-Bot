@@ -184,7 +184,9 @@
         "cup of green tea",
         "cup of earl grey",
         "glass of iced tea",
-        "lemonade"
+        "lemonade",
+        "chocolate milkshake",
+        "vanilla milkshake"
     ],
     "!potion": [
         "potion of lust",
@@ -213,7 +215,8 @@
         "potion of ice breathing",
         "potion of cloning",
         "potion of random transformation",
-        "potion of placebo"
+        "potion of placebo",
+        "potion of impotence"
     ],
     "!toy": [
         "canine dildo with a knot",

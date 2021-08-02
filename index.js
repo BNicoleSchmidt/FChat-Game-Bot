@@ -77,6 +77,7 @@ Model.knex(knex);
 var fchat = new Fchat(config);
 
 const messageQueue = []
+const deathRollTracker = {}
 let isAlive = false
 
 function wrapInUserTags(character) {
@@ -155,8 +156,71 @@ async function spin(character, channel) {
     }
 }
 
+function randomNumber(maximum) {
+    return Math.floor(Math.random() * maximum) + 1
+}
+
 function getRandomItem(category) {
     return getRandom(random[category])
+}
+
+function rollDice(dice, character, channel) {
+    if (dice.includes('rick')) {
+        sendMSG(channel, `${wrapInUserTags(character)} rolls the Rick: [url=https://www.youtube.com/watch?v=dQw4w9WgXcQ]Roll[/url] [eicon]rickroll[/eicon]`)
+        return
+    }
+    let count = 1
+    let sides
+    if (dice.includes('d')) {
+        count = parseInt(dice.split('d')[0], 10)
+        sides = parseInt(dice.split('d')[1], 10)
+    } else {
+        sides = parseInt(dice, 10)
+    }
+    if (isNaN(count) || isNaN(sides) || count <= 0 || sides <= 0) {
+        sendMSG(channel, 'What?')
+    } else if (count > 20) {
+        sendMSG(channel, "That's too many dice. No.")
+    } else {
+        let result
+        if (count === 1) {
+            result = randomNumber(sides)
+        } else {
+            const rolls = []
+            for (let i = 0; i < count; i++) {
+                rolls.push(randomNumber(sides))
+            }
+            result = `${rolls.join(' ')} = ${rolls.reduce((a, b) => a + b, 0)}`
+        }
+        sendMSG(channel, `${wrapInUserTags(character)} rolls ${count}d${sides}: ${boldText(result)}`)
+    }
+}
+
+function performDeathRoll(dice, character, channel) {
+    const result = randomNumber(dice)
+    if (result === 1) {
+        delete deathRollTracker[channel]
+        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls ${boldText(1)}! [eicon]blobcatbongoping[/eicon]`)
+    } else {
+        deathRollTracker[channel] = result
+        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls ${boldText(result)}!`)
+    }
+}
+
+function deathRoll(message, character, channel) {
+    const startArgument = message.split(' ')[1]
+    if (startArgument) {
+        const dice = parseInt(startArgument, 10)
+        if (isNaN(dice) || dice <= 2) {
+            sendMSG(channel, 'Death rolls must start at a minimum of 2.')
+        } else {
+            performDeathRoll(dice, character, channel)
+        }
+    } else if (deathRollTracker[channel]) {
+        performDeathRoll(deathRollTracker[channel], character, channel)
+    } else {
+        sendMSG('There is no Death Roll in progess. Please provide a starting number.')
+    }
 }
 
 fchat.onOpen(ticket => {
@@ -235,42 +299,18 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
     } else if (xmessage.startsWith('!roll')) {
         const dice = xmessage.substr(5)
-        if (dice.includes('rick')) {
-            sendMSG(channel, `${wrapInUserTags(character)} rolls the Rick: [url=https://www.youtube.com/watch?v=dQw4w9WgXcQ]Roll[/url] [eicon]rickroll[/eicon]`)
-            return
-        }
-        let count = 1
-        let sides
-        if (dice.includes('d')) {
-            count = parseInt(dice.split('d')[0], 10)
-            sides = parseInt(dice.split('d')[1], 10)
-        } else {
-            sides = parseInt(dice, 10)
-        }
-        if (isNaN(count) || isNaN(sides) || count <= 0 || sides <= 0) {
-            sendMSG(channel, 'What?')
-        } else if (count > 20) {
-            sendMSG(channel, "That's too many dice. No.")
-        } else {
-            let result
-            if (count === 1) {
-                result = Math.floor(Math.random() * sides) + 1
-            } else {
-                const rolls = []
-                for (let i = 0; i < count; i++) {
-                    rolls.push(Math.floor(Math.random() * sides) + 1)
-                }
-                result = `${rolls.join(' ')} = ${rolls.reduce((a, b) => a + b, 0)}`
-            }
-            sendMSG(channel, `${wrapInUserTags(character)} rolls ${count}d${sides}: ${boldText(result)}`)
-        }
+        rollDice(dice, character, channel)
+    } else if (xmessage.startsWith('!dr')) {
+        deathRoll(xmessage, character, channel)
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, `List of available commands:
         ${formatCommands(joinCommands)}: Join a game
         ${formatCommands(leaveCommands)}: Leave a game
+        ${formatCommands(statusCommands)}: Check current players
         ${formatCommands(bottleSpinCommands)}: Spin the bottle
         ${formatCommands(coinCommands)}: Flip a coin
-        ${formatCommands(statusCommands)}: Check current players
+        ${formatCommands(['!roll #', '!roll #d#'])}: Roll dice
+        ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(helpCommands)}: Show this message`)
