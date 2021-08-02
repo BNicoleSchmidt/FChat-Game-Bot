@@ -211,7 +211,7 @@ function deathRoll(message, character, channel) {
     const startArgument = message.split(' ')[1]
     if (startArgument) {
         const dice = parseInt(startArgument, 10)
-        if (isNaN(dice) || dice <= 2) {
+        if (isNaN(dice) || dice < 2) {
             sendMSG(channel, 'Death rolls must start at a minimum of 2.')
         } else {
             performDeathRoll(dice, character, channel)

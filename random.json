@@ -60,7 +60,9 @@
         "macaron",
         "macaroon",
         "slice of New York cheesecake",
-        "cream pie"
+        "cream pie",
+        "bowl of rabbit stew",
+        "roast duck"
     ],
     "!berry": [
         "Aguav berry",
@@ -136,7 +138,15 @@
         "Wepear berry",
         "Wiki berry",
         "Yache berry",
-        "Pinkan berry"
+        "Balloon berry",
+        "Fluffy berry",
+        "Healing berry",
+        "Melody berry",
+        "Memory berry",
+        "Mirage berry",
+        "Oren berry",
+        "Pinkan berry",
+        "Rinka berry"
     ],
     "!drink": [
         "glass of orange juice",
