@@ -299,6 +299,9 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (randomItemCommands.includes(xmessage)) {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
+    } else if (xmessage == "!8ball") {
+        const result = getRandomItem('8ball')
+        sendMSG(channel, `Magic 8 Ball says: ${boldText(color(result.text, result.color))}`)
     } else if (xmessage.startsWith('!roll')) {
         const dice = xmessage.substr(5)
         rollDice(dice, character, channel)
