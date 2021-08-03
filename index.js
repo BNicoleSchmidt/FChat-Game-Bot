@@ -213,6 +213,8 @@ function deathRoll(message, character, channel) {
         const dice = parseInt(startArgument, 10)
         if (isNaN(dice) || dice < 2) {
             sendMSG(channel, 'Death rolls must start at a minimum of 2.')
+        } else if (dice > 1000) {
+            sendMSG(channel, 'Death rolls must start at 1000 or lower. (Spam prevention)')
         } else {
             performDeathRoll(dice, character, channel)
         }
