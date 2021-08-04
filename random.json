@@ -70,7 +70,10 @@
         "ham and cheese omelette",
         "bacon omelette",
         "Happy Meal",
-        "Double Stuf Oreo"
+        "Double Stuf Oreo",
+        "pound of king crab legs",
+        "single cocktail shrimp",
+        "beer-battered fish and chips"
     ],
     "!berry": [
         "Aguav berry",
@@ -287,6 +290,34 @@
         "set of leg binders",
         "corset",
         "sensory deprivation hood"
+    ],
+    "!costume": [
+        "pair of butterfly wings and an antennae headband",
+        "maid dress with stockings, garter belts, and a mobcap",
+        "dog ear headband, paw gloves, plastic collar, and clip-on tail",
+        "cat ear headband, paw gloves, bell collar, and clip-on tail",
+        "brightly colored superhero bodysuit, mask, and cape",
+        "tailored tuxedo",
+        "sophisticated, elegant ballgown",
+        "sparkly magical girl dress and wand",
+        "set of honeybee wings, antennae headband, and belt-on abdomen with a soft stinger",
+        "string bikini",
+        "firefighter helmet, pants, boots, and suspenders (but no shirt)",
+        "sparkly, fuzzy pink unicorn hoodie",
+        "toga and laurel crown",
+        "red cone hat and cylindrical crayon wrapper body",
+        "plague doctor mask and long black cloak",
+        "cheerleader top and skirt with pompoms",
+        "pair of transluscent harem pants, tiny silk top, pointed shoes, coin belt, and a half-veil",
+        "red hooded cloak and wicker basket",
+        "black cape, white face paint, and a set of plastic vampire fangs",
+        "witch hat, black dress, and stick broom",
+        "cowboy hat, chaps, boots, and a lasso",
+        "tiger-print bodysuit, ears, and tail",
+        "pair of bunny ears, fishnet leggings, leotard, and fluffy bunny tail",
+        "nun habit with coif, wimple, and prayer beads",
+        "shinto priestess outfit with red hakama, white kosode, and a white hair ribbon",
+        "t-rex inflatable costume"
     ],
     "8ball": [
         {"color": "red", "text": "Don't count on it."},

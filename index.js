@@ -271,7 +271,7 @@ const statusCommands = ['!ready', '!status', '!players', '!playing', '!list']
 const bottleSpinCommands = ['!spin', '!bottle']
 const spinbackCommands = ['!spinback', '!togglespinback']
 const helpCommands = ['!help', '!commands', '!info']
-const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!toy', '!bondage']
+const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!costume', '!toy', '!bondage']
 const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
 
 fchat.on("MSG", async ({ character, message, channel }) => {
