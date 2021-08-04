@@ -316,6 +316,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         ${formatCommands(coinCommands)}: Flip a coin
         ${formatCommands(['!roll #', '!roll #d#'])}: Roll dice
         ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
+        ${formatCommands(['!8ball', '!8ball <question>'])}: Seek answers from a higher power
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(helpCommands)}: Show this message`)

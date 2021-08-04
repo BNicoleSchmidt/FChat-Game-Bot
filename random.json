@@ -66,7 +66,11 @@
         "pineapple",
         "watermelon",
         "Blow Pop",
-        "Tootsie Pop"
+        "Tootsie Pop",
+        "ham and cheese omelette",
+        "bacon omelette",
+        "Happy Meal",
+        "Double Stuf Oreo"
     ],
     "!berry": [
         "Aguav berry",
@@ -200,7 +204,9 @@
         "glass of iced tea",
         "lemonade",
         "chocolate milkshake",
-        "vanilla milkshake"
+        "vanilla milkshake",
+        "banana milkshake",
+        "jug of red Kool-Aid"
     ],
     "!potion": [
         "potion of lust",
@@ -230,13 +236,16 @@
         "potion of cloning",
         "potion of random transformation",
         "potion of placebo",
-        "potion of impotence"
+        "potion of impotence",
+        "potion of fertility",
+        "potion of heat/rut"
     ],
     "!toy": [
         "canine dildo with a knot",
         "dragon dildo",
         "tentacle dildo",
         "horse dildo",
+        "soft-barbed cat dildo",
         "human pussy fleshlight",
         "canine spade fleshlight",
         "human mouth fleshlight",
@@ -256,7 +265,9 @@
         "leather whip",
         "cat o'nine tails",
         "pair of ben wa balls",
-        "wooden paddle"
+        "wooden paddle",
+        "cat tail buttplug",
+        "dog tail buttplug"
     ],
     "!bondage": [
         "pair of wrist cuffs",
