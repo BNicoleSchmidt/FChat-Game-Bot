@@ -200,10 +200,10 @@ function performDeathRoll(dice, character, channel) {
     const result = randomNumber(dice)
     if (result === 1) {
         delete deathRollTracker[channel]
-        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls ${boldText(1)}! [eicon]blobcatbongoping[/eicon]`)
+        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(1)}! [eicon]blobcatbongoping[/eicon]`)
     } else {
         deathRollTracker[channel] = result
-        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls ${boldText(result)}!`)
+        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(result)}!`)
     }
 }
 
