@@ -203,7 +203,7 @@ function performDeathRoll(dice, character, channel) {
         sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(1)}! [eicon]blobcatbongoping[/eicon]`)
     } else {
         deathRollTracker[channel] = result
-        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(result)}!`)
+        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(result)}!${result === 69 ? ` ${boldText('Nice.')}` : ''}`)
     }
 }
 
