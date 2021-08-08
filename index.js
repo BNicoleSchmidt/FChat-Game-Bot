@@ -140,19 +140,42 @@ function getRandom(options) {
     return options[Math.floor(Math.random() * (options.length))]
 }
 
-async function spin(character, channel) {
+function manipulateBottleOdds(players) {
+    const adjustedPool = []
+    for (const player of players) {
+        for (let i = 0; i < player.rounds + 1; i++) {
+            adjustedPool.push(player.character)
+        }
+    }
+    return adjustedPool
+}
+
+async function updateRoundCounts(channel, players, spunPlayer, spinner) {
+    await Player.query()
+        .whereIn('character', players.filter(p => p.character !== spinner).map(p => p.character))
+        .where('channel_id', channel)
+        .increment('rounds', 1)
+
+    await Player.query()
+        .where('channel_id', channel)
+        .where('character', spunPlayer)
+        .update({rounds: 0})
+}
+
+async function spin(spinner, channel) {
     const channelInfo = await Channel.query().findById(channel).withGraphFetched('players')
-    const players = channelInfo.players.map(p => p.character)
+    const players = channelInfo.players
     const requiredPlayers = channelInfo.spinback ? 4 : 3
-    if (!players.includes(character)) {
-        sendMSG(channel, `You can't spin if you aren't playing, ${wrapInUserTags(character)}! Join the game first!`)
+    if (!players.map(p => p.character).includes(spinner)) {
+        sendMSG(channel, `You can't spin if you aren't playing, ${wrapInUserTags(spinner)}! Join the game first!`)
     } else if (players.length < requiredPlayers) {
         sendMSG(channel, `There aren't enough players in the game. ${requiredPlayers} players are required in order to spin. ${currentPlayersCount(channelInfo)}`)
     } else {
-        const eligiblePlayers = players.filter(c => c !== character && (!channelInfo.spinback || c !== channelInfo.last_spinner))
-        const chosenPlayer = getRandom(eligiblePlayers)
-        sendMSG(channel, `${wrapInUserTags(character)} spins the bottle! It points to... ${wrapInUserTags(chosenPlayer)}!`)
-        await Channel.query().findById(channel).update({last_spinner: character})
+        const eligiblePlayers = players.filter(c => c.character !== spinner && (!channelInfo.spinback || c.character !== channelInfo.last_spinner))
+        const chosenCharacter = getRandom(manipulateBottleOdds(eligiblePlayers))
+        sendMSG(channel, `${wrapInUserTags(spinner)} spins the bottle! It points to... ${wrapInUserTags(chosenCharacter)}!`)
+        await Channel.query().findById(channel).update({last_spinner: spinner})
+        await updateRoundCounts(channel, players, chosenCharacter, spinner)
     }
 }
 
