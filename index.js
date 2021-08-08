@@ -1,6 +1,7 @@
 const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
 const random = require("./random");
+const allPokemon = require("./pokemon");
 const { Model } = require('objection');
 
 class Player extends Model {
@@ -79,6 +80,11 @@ var fchat = new Fchat(config);
 const messageQueue = []
 const deathRollTracker = {}
 let isAlive = false
+
+
+function capitalize([first, ...rest]) {
+    return first.toUpperCase() + rest.join('')
+}
 
 function wrapInUserTags(character) {
     return `[user]${character}[/user]`
@@ -185,6 +191,21 @@ function randomNumber(maximum) {
 
 function getRandomItem(category) {
     return getRandom(random[category])
+}
+
+function getPokemonGender(rate) {
+    if (rate === -1) {
+        return color('Genderless', 'gray')
+    }
+    return Math.floor(Math.random() * 8) < rate ? color('Female', 'pink') : color('Male', 'blue')
+}
+
+function getPokemon(channel, character) {
+    const pokemon = getRandom(allPokemon)
+    const form = getRandom(pokemon.forms)
+    const result = boldText(`${getPokemonGender(pokemon.genderRate)} ${form == 'normal' ? '' : color(capitalize(form), 'yellow') + ' '}${capitalize(pokemon.name)}`)
+    const prefixes = ['How about', 'Maybe', 'Try', 'Perhaps', 'Ever thought about', 'Why not']
+    sendMSG(channel, `${getRandom(prefixes)} ${result}, ${wrapInUserTags(character)}?`)
 }
 
 function rollDice(dice, character, channel) {
@@ -322,6 +343,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (randomItemCommands.includes(xmessage)) {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
+    } else if (xmessage == '!pokemon') {
+        getPokemon(channel, character)
     } else if (xmessage.startsWith("!8ball")) {
         const result = getRandomItem('8ball')
         sendMSG(channel, `Magic 8 Ball says: ${boldText(color(result.text, result.color))}`)
@@ -341,6 +364,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
         ${formatCommands(['!8ball', '!8ball <question>'])}: Seek answers from a higher power
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
+        ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(helpCommands)}: Show this message`)
     }
