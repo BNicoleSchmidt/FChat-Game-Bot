@@ -241,7 +241,7 @@ function rollDice(dice, character, channel) {
 }
 
 function performDeathRoll(dice, character, channel) {
-    const result = randomNumber(dice)
+    const result = character == 'Athena Esparza' && dice < 6 ? 1 : randomNumber(dice)
     if (result === 1) {
         delete deathRollTracker[channel]
         sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(1)}! [eicon]blobcatbongoping[/eicon]`)
