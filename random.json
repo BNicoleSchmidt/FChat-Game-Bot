@@ -73,7 +73,9 @@
         "Double Stuf Oreo",
         "pound of king crab legs",
         "single cocktail shrimp",
-        "beer-battered fish and chips"
+        "beer-battered fish and chips",
+        "bowl of cereal",
+        "Belgian waffle"
     ],
     "!berry": [
         "Aguav berry",
@@ -241,6 +243,12 @@
         "potion of placebo",
         "potion of impotence",
         "potion of fertility",
+        "potion of infertility",
+        "potion of edging",
+        "potion of orgasm prevention",
+        "potion of levitation",
+        "potion of obedience",
+        "potion of love",
         "potion of heat/rut"
     ],
     "!toy": [
@@ -318,7 +326,8 @@
         "nun habit with coif, wimple, and prayer beads",
         "shinto priestess outfit with red hakama, white kosode, and a white hair ribbon",
         "t-rex inflatable costume",
-        "knight's tunic, a plastic breastplate and helmet, and a wooden sword and shield"
+        "knight's tunic, a plastic breastplate and helmet, and a wooden sword and shield",
+        "ballerina leotard, tutu, tights and pointe shoes"
     ],
     "8ball": [
         {"color": "red", "text": "Don't count on it."},
