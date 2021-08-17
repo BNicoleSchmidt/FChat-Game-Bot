@@ -244,7 +244,7 @@ function performDeathRoll(dice, character, channel) {
     const result = character == 'Athena Esparza' && dice < 4 ? 1 : randomNumber(dice)
     if (result === 1) {
         delete deathRollTracker[channel]
-        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(1)}! [eicon]blobcatbongoping[/eicon]`)
+        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(1)}! [eicon]${dice > 10 ? 'nuke' : 'blobcatbongoping'}[/eicon]`)
     } else {
         deathRollTracker[channel] = result
         sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(result)}!${result === 69 ? ` ${boldText('Nice.')}` : ''}`)
