@@ -75,7 +75,8 @@
         "single cocktail shrimp",
         "beer-battered fish and chips",
         "bowl of cereal",
-        "Belgian waffle"
+        "Belgian waffle",
+        "can of whipped cream"
     ],
     "!berry": [
         "Aguav berry",
@@ -241,15 +242,20 @@
         "potion of cloning",
         "potion of random transformation",
         "potion of placebo",
-        "potion of impotence",
-        "potion of fertility",
-        "potion of infertility",
+        "potion of infertility/impotence",
+        "potion of fertility/virility",
         "potion of edging",
         "potion of orgasm prevention",
         "potion of levitation",
         "potion of obedience",
         "potion of love",
-        "potion of heat/rut"
+        "potion of heat/rut",
+        "potion of truth",
+        "potion of deceit",
+        "potion of numbness",
+        "potion of sensitivity",
+        "potion of femininity",
+        "potion of masculinity"
     ],
     "!toy": [
         "canine dildo with a knot",
