@@ -1,3 +1,4 @@
+const startDate = new Date()
 const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
 const random = require("./random");
@@ -81,6 +82,15 @@ const messageQueue = []
 const deathRollTracker = {}
 let isAlive = false
 
+async function removeDeadChannels() {
+    const deadChannels = await Channel.query().where({pending: true})
+    const deadChannelIds = deadChannels.map(c => c.id)
+    await Mod.query().delete().whereIn('channel_id', deadChannelIds)
+    await Player.query().delete().whereIn('channel_id', deadChannelIds)
+    await Channel.query().findByIds(deadChannelIds).delete()
+    console.log('Removed dead channels:', JSON.stringify(deadChannels.map(c => c.title)))
+}
+
 
 function capitalize([first, ...rest]) {
     return first.toUpperCase() + rest.join('')
@@ -131,14 +141,16 @@ async function addPlayer(character, channel) {
     }
 }
 
-async function removePlayer(character, channel, disconnect = false) {
-    const players = (await Player.query().where('channel_id', channel)).map(p => p.character)
+async function removePlayer(character, channel, disconnect = false, kick = false) {
+    const players = (await Player.query().where('channel_id', channel)).map(p => p.character.toLowerCase())
     if (players.includes(character)) {
-        await Player.query().where('character', character).where('channel_id', channel).delete()
+        await Player.query().whereRaw('character ILIKE ?', [character]).where('channel_id', channel).delete()
         const channelInfo = await Channel.query().findById(channel).withGraphFetched('players')
         sendMSG(channel, `${wrapInUserTags(character)} has left the game. ${currentPlayersCount(channelInfo)}`)
-    } else if (!disconnect) {
+    } else if (!disconnect && !kick) {
         sendMSG(channel, `You're already not in the game, ${wrapInUserTags(character)}.`)
+    } else if (kick) {
+        sendMSG(channel, `${wrapInUserTags(character)} is not in the game.`)
     }
 }
 
@@ -282,16 +294,23 @@ fchat.on("ERR", event => {
 })
 
 fchat.on("CON", async () => {
-    const channels = await Channel.query()
+    fchat.send('STA', {
+        status: 'online',
+        statusmsg: `For a list of commands, use ${boldText('!info')}\n` + 
+        `This bot restarts every 24 hours due to Heroku worker limitations. Last restart: ${startDate.toUTCString()}.\n` +
+        `Questions or concerns, please contact ${wrapInUserTags('Mitena Twoheart')} or ${wrapInUserTags('Jingly Isabelle')}.\n`
+    })
+    const channels = await Channel.query().update({pending: true}).returning('*')
     for (const channel of channels) {
-        fchat.send('JCH', { channel: channel.id })
+        fchat.send('JCH', {channel: channel.id})
     }
+    setTimeout(removeDeadChannels, 5 * 60 * 1000)
 })
 
 fchat.on("JCH", async ({ channel, character, title }) => {
     if (character.identity === 'Game Bot') {
         console.log('Joined channel', title)
-        const existing = await Channel.query().findById(channel)
+        const existing = await Channel.query().findById(channel).update({pending: false})
         if (!existing) {
             await Channel.query().insert({id: channel, title, spinback: true})
         }
@@ -316,6 +335,8 @@ const bottleSpinCommands = ['!spin', '!bottle']
 const spinbackCommands = ['!spinback', '!togglespinback']
 const helpCommands = ['!help', '!commands', '!info']
 const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!costume', '!toy', '!bondage']
+const todRuleCommands = ['!tod help', '!tod help', '!rulestod', '!rules tod', '!todrules', '!tod rules', '!help tod']
+const drRuleCommands = ['!dr help', '!drhelp', '!rulesdr', '!drrules', '!rules dr', '!dr rules', '!help dr']
 const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
 
 fchat.on("MSG", async ({ character, message, channel }) => {
@@ -326,6 +347,10 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         await addPlayer(character, channel)
     } else if (leaveCommands.includes(xmessage)) {
         await removePlayer(character, channel)
+    } else if (xmessage.startsWith('!kick ')) {
+        const name = xmessage.substr(6)
+        console.log('name: -' + name + '-')
+        await removePlayer(name, channel, false, true)
     } else if (bottleSpinCommands.includes(xmessage)) {
         await spin(character, channel)
     } else if (coinCommands.includes(xmessage)) {
@@ -351,13 +376,28 @@ fchat.on("MSG", async ({ character, message, channel }) => {
     } else if (xmessage.startsWith('!roll')) {
         const dice = xmessage.substr(5)
         rollDice(dice, character, channel)
-    } else if (xmessage.startsWith('!dr')) {
-        deathRoll(xmessage, character, channel)
+    } else if (todRuleCommands.includes(xmessage)) {
+        sendMSG(channel, `Truth or Dare Rules (And suggestions):
+        A game requires a minimum of 3 players. If spinback prevention is turned on, this is raised to 4.
+        Spinback prevention means that the bottle will not land on the person who spun it last, so the game can't just go back and forth between two players.
+        Be respectful of players' orientations, kinks, and room rules. Generally speaking, dares should not include extreme/gross kinks.
+        If a player does not respond within 5 minutes, it is okay to skip them and spin again to keep the game moving.
+        In order to keep the game going smoothly and lessen the downtime between spins, it can be helpful to spin the bottle after being told your dare, but before you actually perform it. This gives time for the next player to decide whether to do a Truth or Dare while you are still working on writing out your own actions.`)
+    } else if (drRuleCommands.includes(xmessage)) {
+        sendMSG(channel, `Death Roll Rules (And suggestions):
+        A Death Roll can be performed between two or more players.
+        Only one Death Roll can be in progress at a time in a channel.
+        Usually there are stakes laid out before the rolling begins - a bet between the players that can be nearly anything.
+        Commonly, this is simply an order that the winner will give to the loser that they must obey, though the specific order isn't known until after the rolling ends.
+        The starting player chooses a number to begin (2-1000) and uses the command ${boldText('!dr 314')} for instance.
+        Players then take turns using ${boldText('!dr')} to keep rolling against the previous number rolled.
+        The numbers will gradually go down until a player eventually rolls a ${boldText('1')}. That player loses!`)
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, `List of available commands:
         ${formatCommands(joinCommands)}: Join a game
         ${formatCommands(leaveCommands)}: Leave a game
         ${formatCommands(statusCommands)}: Check current players
+        ${formatCommands(['!kick <name>'])}: Kick a player from a game (Not case sensitive, but must be full name)
         ${formatCommands(bottleSpinCommands)}: Spin the bottle
         ${formatCommands(coinCommands)}: Flip a coin
         ${formatCommands(['!roll #', '!roll #d#'])}: Roll dice
@@ -366,7 +406,11 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
         ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
+        ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
+        ${formatCommands(drRuleCommands)}: Show rules for Death Roll
         ${formatCommands(helpCommands)}: Show this message`)
+    } else if (xmessage.startsWith('!dr')) {
+        deathRoll(xmessage, character, channel)
     }
 })
 
