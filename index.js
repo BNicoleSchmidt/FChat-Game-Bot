@@ -143,7 +143,7 @@ async function addPlayer(character, channel) {
 
 async function removePlayer(character, channel, disconnect = false, kick = false) {
     const players = (await Player.query().where('channel_id', channel)).map(p => p.character.toLowerCase())
-    if (players.includes(character)) {
+    if (players.includes(character.toLowerCase())) {
         await Player.query().whereRaw('character ILIKE ?', [character]).where('channel_id', channel).delete()
         const channelInfo = await Channel.query().findById(channel).withGraphFetched('players')
         sendMSG(channel, `${wrapInUserTags(character)} has left the game. ${currentPlayersCount(channelInfo)}`)
