@@ -366,5 +366,25 @@
         {"color": "green", "text": "Signs point to yes."},
         {"color": "green", "text": "Fuck yes."},
         {"color": "green", "text": "Well, obviously."}
+    ],
+    "athena": [
+        "/me produces a [b][color=blue]Milkbone[/color][/b].",
+        "/me produces a [b][color=blue]rawhide chew stick[/color][/b].",
+        "/me produces a [b][color=blue]cow femur[/color][/b].",
+        "/me produces a [b][color=blue]pig ear[/color][/b].",
+        "/me produces a [b][color=blue]squeaky rubber squirrel toy[/color][/b].",
+        "/me produces a [b][color=blue]teddy bear[/color][/b].",
+        "/me produces a [b][color=blue]dental bone[/color][/b].",
+        "/me produces a [b][color=blue]collar and leash[/color][/b].",
+        "/me produces a [b][color=blue]Braixen plushie.[/color][/b].",
+        "/me produces an [url=https://www.kongcompany.com/dog/collections/kong-shape/kong-classic]XXL KONG toy[/url] filled with peanut butter.",
+        "/me holds a Beggin Strip over Athena's nose.",
+        "/me tosses a tennis ball toward Athena.",
+        "/me fills Athena's bowl with more kibble.",
+        "Does someone need walkies?",
+        "Athena, sit!",
+        "Athena, roll over!",
+        "Athena, play dead!",
+        "Athena, be a good girl."
     ]
 }

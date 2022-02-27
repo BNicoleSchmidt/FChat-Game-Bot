@@ -108,6 +108,10 @@ function color(text, color) {
     return `[color=${color}]${text}[/color]`
 }
 
+function eicon(text) {
+    return `[eicon]${text}[/eicon]`
+}
+
 function formatCommands(commands) {
     return commands.map(boldText).join(', ')
 }
@@ -222,7 +226,7 @@ function getPokemon(channel, character) {
 
 function rollDice(dice, character, channel) {
     if (dice.includes('rick')) {
-        sendMSG(channel, `${wrapInUserTags(character)} rolls the Rick: [url=https://www.youtube.com/watch?v=dQw4w9WgXcQ]Roll[/url] [eicon]rickroll[/eicon]`)
+        sendMSG(channel, `${wrapInUserTags(character)} rolls the Rick: [url=https://www.youtube.com/watch?v=dQw4w9WgXcQ]Roll[/url] ${eicon('rickroll')}`)
         return
     }
     let count = 1
@@ -256,7 +260,7 @@ function performDeathRoll(dice, character, channel) {
     const result = randomNumber(dice)
     if (result === 1) {
         delete deathRollTracker[channel]
-        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(1)}! [eicon]${dice > 10 ? 'nuke' : 'blobcatbongoping'}[/eicon]`)
+        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(1)}! ${eicon(dice > 10 ? 'nuke' : 'blobcatbongoping')}`)
     } else {
         deathRollTracker[channel] = result
         sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(result)}!${result === 69 ? ` ${boldText('Nice.')}` : ''}`)
@@ -349,7 +353,6 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         await removePlayer(character, channel)
     } else if (xmessage.startsWith('!kick ')) {
         const name = xmessage.substr(6)
-        console.log('name: -' + name + '-')
         await removePlayer(name, channel, false, true)
     } else if (bottleSpinCommands.includes(xmessage)) {
         await spin(character, channel)
@@ -411,6 +414,13 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         ${formatCommands(helpCommands)}: Show this message`)
     } else if (xmessage.startsWith('!dr')) {
         deathRoll(xmessage, character, channel)
+    } else if (character === 'Athena Esparza' && xmessage.includes(eicon('dognoise'))) {
+        const result = randomNumber(100)
+        if (result > 50) {
+            sendMSG(getRandomItem('athena'))
+        } else if (result === 1) {
+            sendMSG('/me attempts to put a muzzle on Athena.')
+        }
     }
 })
 
