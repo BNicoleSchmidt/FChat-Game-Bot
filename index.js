@@ -304,10 +304,6 @@ function deathRoll(message, character, channel) {
     }
 }
 
-function getCurse(character, channel) {
-
-}
-
 fchat.onOpen(ticket => {
     console.log(`Websocket connection opened. Identifying with ticket: ${ticket}`);
 });
@@ -378,6 +374,7 @@ const helpText = `List of available commands:
         ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
         ${formatCommands(['!8ball', '!8ball <question>'])}: Seek answers from a higher power
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
+        ${formatCommands(randomEffectCommands)}: Create a random effect from the given category
         ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
@@ -443,23 +440,6 @@ fchat.on("MSG", async ({ character, message, channel }) => {
     } else if (drRuleCommands.includes(xmessage)) {
         sendMSG(channel, drRules)
     } else if (helpCommands.includes(xmessage)) {
-        sendMSG(channel, `List of available commands:
-        ${formatCommands(joinCommands)}: Join a game
-        ${formatCommands(leaveCommands)}: Leave a game
-        ${formatCommands(statusCommands)}: Check current players
-        ${formatCommands(['!kick <name>'])}: Kick a player from a game (Not case sensitive, but must be full name)
-        ${formatCommands(bottleSpinCommands)}: Spin the bottle
-        ${formatCommands(coinCommands)}: Flip a coin
-        ${formatCommands(['!roll #', '!roll #d#'])}: Roll dice
-        ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
-        ${formatCommands(['!8ball', '!8ball <question>'])}: Seek answers from a higher power
-        ${formatCommands(randomItemCommands)}: Produce a random item from the given category
-        ${formatCommands(randomEffectCommands)}: Create a random effect from the given category
-        ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
-        ${formatCommands(spinbackCommands)}: Toggle spinback prevention
-        ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
-        ${formatCommands(drRuleCommands)}: Show rules for Death Roll
-        ${formatCommands(helpCommands)}: Show this message`)
         sendMSG(channel, helpText)
     } else if (xmessage.startsWith('!dr')) {
         deathRoll(xmessage, character, channel)
