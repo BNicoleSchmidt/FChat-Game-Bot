@@ -225,34 +225,57 @@ function getPokemon(channel, character) {
 }
 
 function rollDice(dice, character, channel) {
+    // Pickle Riiiiiiiick!
     if (dice.includes('rick')) {
         sendMSG(channel, `${wrapInUserTags(character)} rolls the Rick: [url=https://www.youtube.com/watch?v=dQw4w9WgXcQ]Roll[/url] ${eicon('rickroll')}`)
         return
     }
+
+    // Strip any spaces, e.g. 1d20 + 5 => 1d20+5
+    dice = dice.replace(/\s/g, '')
+
     let count = 1
     let sides
+    let modifier = 0
+    let modifierStr = ''
     if (dice.includes('d')) {
-        count = parseInt(dice.split('d')[0], 10)
-        sides = parseInt(dice.split('d')[1], 10)
+        let [prefix, suffix] = dice.split('d')
+        count = parseInt(prefix, 10)
+
+        // Check for basic modifier, right now just adding or subtracting.
+        if (suffix.includes('+')) {
+            sides = parseInt(suffix.split('+')[0], 10)
+            modifier += parseInt(suffix.split('+')[1], 10)
+            modifierStr = `+${modifier}`
+        } else if (suffix.includes('-')) {
+            sides = parseInt(suffix.split('-')[0], 10)
+            modifier -= parseInt(suffix.split('-')[1], 10)
+            modifierStr = `${modifier}`
+        } else {
+            sides = parseInt(suffix, 10)
+        }
     } else {
         sides = parseInt(dice, 10)
     }
-    if (isNaN(count) || isNaN(sides) || count <= 0 || sides <= 0) {
+
+
+    if (isNaN(count) || isNaN(sides) || isNaN(modifier) || count <= 0 || sides <= 0) {
         sendMSG(channel, 'What?')
     } else if (count > 20) {
         sendMSG(channel, "That's too many dice. No.")
     } else {
         let result
         if (count === 1) {
-            result = randomNumber(sides)
+            result = randomNumber(sides) + modifier
         } else {
             const rolls = []
             for (let i = 0; i < count; i++) {
                 rolls.push(randomNumber(sides))
             }
-            result = `${rolls.join(' ')} = ${rolls.reduce((a, b) => a + b, 0)}`
+            result = `${rolls.join(' ')} ${modifierStr ? '(' + modifierStr + ') ' : ''}= ${rolls.reduce((a, b) => a + b, 0) + modifier}`
         }
-        sendMSG(channel, `${wrapInUserTags(character)} rolls ${count}d${sides}: ${boldText(result)}`)
+
+        sendMSG(channel, `${wrapInUserTags(character)} rolls ${count}d${sides}${modifierStr}: ${boldText(result)}`)
     }
 }
 
