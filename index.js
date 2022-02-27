@@ -304,6 +304,10 @@ function deathRoll(message, character, channel) {
     }
 }
 
+function getCurse(character, channel) {
+
+}
+
 fchat.onOpen(ticket => {
     console.log(`Websocket connection opened. Identifying with ticket: ${ticket}`);
 });
@@ -358,6 +362,7 @@ const bottleSpinCommands = ['!spin', '!bottle']
 const spinbackCommands = ['!spinback', '!togglespinback']
 const helpCommands = ['!help', '!commands', '!info']
 const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!costume', '!toy', '!bondage']
+const randomEffectCommands = ['!curse']
 const todRuleCommands = ['!tod help', '!tod help', '!rulestod', '!rules tod', '!todrules', '!tod rules', '!help tod']
 const drRuleCommands = ['!dr help', '!drhelp', '!rulesdr', '!drrules', '!rules dr', '!dr rules', '!help dr']
 const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
@@ -390,7 +395,11 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (randomItemCommands.includes(xmessage)) {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
-    } else if (xmessage == '!pokemon') {
+    } else if (randomEffectCommands.includes(xmessage)) {
+        // Mitena: making this its own thing for color and formatting reasons. Normally I'd just add this to randomItemCommands and call it a day.
+        const { type, effect, description } = getRandomItem(xmessage)
+        sendMSG(channel, `/me afflicts the ${boldText(color(type + ' of ' + effect), 'red')}! ${boldText(color(description), 'white')}`)
+    } else if (xmessage === '!pokemon') {
         getPokemon(channel, character)
     } else if (xmessage.startsWith("!8ball")) {
         const result = getRandomItem('8ball')
@@ -426,6 +435,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
         ${formatCommands(['!8ball', '!8ball <question>'])}: Seek answers from a higher power
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
+        ${formatCommands(randomEffectCommands)}: Create a random effect from the given category
         ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
