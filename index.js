@@ -367,6 +367,37 @@ const todRuleCommands = ['!tod help', '!tod help', '!rulestod', '!rules tod', '!
 const drRuleCommands = ['!dr help', '!drhelp', '!rulesdr', '!drrules', '!rules dr', '!dr rules', '!help dr']
 const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
 
+const helpText = `List of available commands:
+        ${formatCommands(joinCommands)}: Join a game
+        ${formatCommands(leaveCommands)}: Leave a game
+        ${formatCommands(statusCommands)}: Check current players
+        ${formatCommands(['!kick <name>'])}: Kick a player from a game (Not case sensitive, but must be full name)
+        ${formatCommands(bottleSpinCommands)}: Spin the bottle
+        ${formatCommands(coinCommands)}: Flip a coin
+        ${formatCommands(['!roll #', '!roll #d#'])}: Roll dice
+        ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
+        ${formatCommands(['!8ball', '!8ball <question>'])}: Seek answers from a higher power
+        ${formatCommands(randomItemCommands)}: Produce a random item from the given category
+        ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
+        ${formatCommands(spinbackCommands)}: Toggle spinback prevention
+        ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
+        ${formatCommands(drRuleCommands)}: Show rules for Death Roll
+        ${formatCommands(helpCommands)}: Show this message`
+const todRules = `Truth or Dare Rules (And suggestions):
+        A game requires a minimum of 3 players. If spinback prevention is turned on, this is raised to 4.
+        Spinback prevention means that the bottle will not land on the person who spun it last, so the game can't just go back and forth between two players.
+        Be respectful of players' orientations, kinks, and room rules. Generally speaking, dares should not include extreme/gross kinks.
+        If a player does not respond within 5 minutes, it is okay to skip them and spin again to keep the game moving.
+        In order to keep the game going smoothly and lessen the downtime between spins, it can be helpful to spin the bottle after being told your dare, but before you actually perform it. This gives time for the next player to decide whether to do a Truth or Dare while you are still working on writing out your own actions.`
+const drRules = `Death Roll Rules (And suggestions):
+        A Death Roll can be performed between two or more players.
+        Only one Death Roll can be in progress at a time in a channel.
+        Usually there are stakes laid out before the rolling begins - a bet between the players that can be nearly anything.
+        Commonly, this is simply an order that the winner will give to the loser that they must obey, though the specific order isn't known until after the rolling ends.
+        The starting player chooses a number to begin (2-1000) and uses the command ${boldText('!dr 314')} for instance.
+        Players then take turns using ${boldText('!dr')} to keep rolling against the previous number rolled.
+        The numbers will gradually go down until a player eventually rolls a ${boldText('1')}. That player loses!`
+
 fchat.on("MSG", async ({ character, message, channel }) => {
     const xmessage = message.toLowerCase().trim()
     if (xmessage.includes('hey game bot')) {
@@ -408,21 +439,9 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         const dice = xmessage.substr(5)
         rollDice(dice, character, channel)
     } else if (todRuleCommands.includes(xmessage)) {
-        sendMSG(channel, `Truth or Dare Rules (And suggestions):
-        A game requires a minimum of 3 players. If spinback prevention is turned on, this is raised to 4.
-        Spinback prevention means that the bottle will not land on the person who spun it last, so the game can't just go back and forth between two players.
-        Be respectful of players' orientations, kinks, and room rules. Generally speaking, dares should not include extreme/gross kinks.
-        If a player does not respond within 5 minutes, it is okay to skip them and spin again to keep the game moving.
-        In order to keep the game going smoothly and lessen the downtime between spins, it can be helpful to spin the bottle after being told your dare, but before you actually perform it. This gives time for the next player to decide whether to do a Truth or Dare while you are still working on writing out your own actions.`)
+        sendMSG(channel, todRules)
     } else if (drRuleCommands.includes(xmessage)) {
-        sendMSG(channel, `Death Roll Rules (And suggestions):
-        A Death Roll can be performed between two or more players.
-        Only one Death Roll can be in progress at a time in a channel.
-        Usually there are stakes laid out before the rolling begins - a bet between the players that can be nearly anything.
-        Commonly, this is simply an order that the winner will give to the loser that they must obey, though the specific order isn't known until after the rolling ends.
-        The starting player chooses a number to begin (2-1000) and uses the command ${boldText('!dr 314')} for instance.
-        Players then take turns using ${boldText('!dr')} to keep rolling against the previous number rolled.
-        The numbers will gradually go down until a player eventually rolls a ${boldText('1')}. That player loses!`)
+        sendMSG(channel, drRules)
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, `List of available commands:
         ${formatCommands(joinCommands)}: Join a game
@@ -441,6 +460,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
         ${formatCommands(drRuleCommands)}: Show rules for Death Roll
         ${formatCommands(helpCommands)}: Show this message`)
+        sendMSG(channel, helpText)
     } else if (xmessage.startsWith('!dr')) {
         deathRoll(xmessage, character, channel)
     } else if (character === 'Athena Esparza') {
@@ -461,6 +481,19 @@ fchat.on("MSG", async ({ character, message, channel }) => {
                 sendMSG(channel, '/me attempts to put a muzzle on Athena.')
             }
         }
+    }
+})
+
+fchat.on('PRI', async ({ character, message }) => {
+    const xmessage = message.toLowerCase()
+    if (todRuleCommands.includes(xmessage)) {
+        sendPRI(character, todRules)
+    } else if (drRuleCommands.includes(xmessage)) {
+        sendPRI(character, drRules)
+    } else if (helpCommands.includes(xmessage)) {
+        sendPRI(character, helpText)
+    } else if (character === 'Mitena Twoheart') {
+        sendPRI(character, message)        
     }
 })
 
