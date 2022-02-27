@@ -414,12 +414,23 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         ${formatCommands(helpCommands)}: Show this message`)
     } else if (xmessage.startsWith('!dr')) {
         deathRoll(xmessage, character, channel)
-    } else if (character === 'Athena Esparza' && xmessage.includes(eicon('dognoise'))) {
-        const result = randomNumber(100)
-        if (result > 50) {
-            sendMSG(getRandomItem('athena'))
-        } else if (result === 1) {
-            sendMSG('/me attempts to put a muzzle on Athena.')
+    } else if (character === 'Athena Esparza') {
+        const triggers = [
+            eicon('dognoise'),
+            eicon('athenascream'),
+            eicon('athenascreaming'),
+            'wail',
+            'wailing',
+            'scream',
+            'screaming'
+        ]
+        if (triggers.find(tr => xmessage.endsWith(tr))) {
+            const result = randomNumber(100)
+            if (result > 50) {
+                sendMSG(channel, getRandomItem('athena'))
+            } else if (result === 1) {
+                sendMSG(channel, '/me attempts to put a muzzle on Athena.')
+            }
         }
     }
 })
