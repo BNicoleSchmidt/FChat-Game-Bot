@@ -225,13 +225,11 @@ function getPokemon(channel, character) {
 }
 
 function rollDice(dice, character, channel) {
-    // Pickle Riiiiiiiick!
     if (dice.includes('rick')) {
         sendMSG(channel, `${wrapInUserTags(character)} rolls the Rick: [url=https://www.youtube.com/watch?v=dQw4w9WgXcQ]Roll[/url] ${eicon('rickroll')}`)
         return
     }
 
-    // Strip any spaces, e.g. 1d20 + 5 => 1d20+5
     dice = dice.replace(/\s/g, '')
 
     let count = 1
@@ -241,8 +239,6 @@ function rollDice(dice, character, channel) {
     if (dice.includes('d')) {
         let [prefix, suffix] = dice.split('d')
         count = parseInt(prefix, 10)
-
-        // Check for basic modifier, right now just adding or subtracting.
         if (suffix.includes('+')) {
             sides = parseInt(suffix.split('+')[0], 10)
             modifier += parseInt(suffix.split('+')[1], 10)
@@ -261,7 +257,7 @@ function rollDice(dice, character, channel) {
 
     if (isNaN(count) || isNaN(sides) || isNaN(modifier) || count <= 0 || sides <= 0) {
         sendMSG(channel, 'What?')
-    } else if (count > 20) {
+    } else if (count > 25) {
         sendMSG(channel, "That's too many dice. No.")
     } else {
         let result
