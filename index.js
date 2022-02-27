@@ -454,7 +454,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         ]
         if (triggers.find(tr => xmessage.endsWith(tr))) {
             const result = randomNumber(100)
-            if (result > 50) {
+            if (result > 20) {
                 sendMSG(channel, getRandomItem('athena'))
             } else if (result === 1) {
                 sendMSG(channel, '/me attempts to put a muzzle on Athena.')
@@ -472,7 +472,12 @@ fchat.on('PRI', async ({ character, message }) => {
     } else if (helpCommands.includes(xmessage)) {
         sendPRI(character, helpText)
     } else if (character === 'Mitena Twoheart') {
-        sendPRI(character, message)        
+        if (message.includes('|')) {
+            let [channel, command] = message.split('|')
+            sendMSG(channel, command)
+        } else {
+            sendPRI(character, message)
+        }      
     }
 })
 
