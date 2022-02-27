@@ -424,9 +424,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
     } else if (randomItemCommands.includes(xmessage)) {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
     } else if (randomEffectCommands.includes(xmessage)) {
-        // Mitena: making this its own thing for color and formatting reasons. Normally I'd just add this to randomItemCommands and call it a day.
-        const { type, effect, description } = getRandomItem(xmessage)
-        sendMSG(channel, `/me afflicts the ${boldText(color(type + ' of ' + effect), 'red')}! ${boldText(color(description), 'white')}`)
+        const effect = getRandomItem(xmessage)
+        sendMSG(channel, `/me calls forth a ${boldText(color(capitalize(xmessage.substr(1)) + ' of ' + effect.effect, effect.color))}! ${boldText(color(effect.description, 'white'))}`)
     } else if (xmessage === '!pokemon') {
         getPokemon(channel, character)
     } else if (xmessage.startsWith("!8ball")) {
