@@ -395,6 +395,8 @@ const drRules = `Death Roll Rules (And suggestions):
         Players then take turns using ${boldText('!dr')} to keep rolling against the previous number rolled.
         The numbers will gradually go down until a player eventually rolls a ${boldText('1')}. That player loses!`
 
+const badBotRegex = new RegExp(/\bbad bot\b/, 'i')
+
 fchat.on("MSG", async ({ character, message, channel }) => {
     const xmessage = message.toLowerCase().trim()
     if (xmessage.includes('hey game bot')) {
@@ -444,6 +446,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, getRandomItem('!curses'))
     } else if (xmessage.startsWith('!dr')) {
         deathRoll(xmessage, character, channel)
+    } else if (badBotRegex.test(xmessage)) {
+        sendPRI('Mitena Twoheart', `Channel: ${channel} - Matched 'bad bot' in message: \r${message}`)
     } else if (character === 'Athena Esparza') {
         const triggers = [
             eicon('dognoise'),
