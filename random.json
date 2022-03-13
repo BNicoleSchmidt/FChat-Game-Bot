@@ -379,7 +379,25 @@
         {"color": "red", "effect": "Cassandra", "description": "No one believes a word you say, whether you're telling the truth or not."},
         {"color": "red", "effect": "Chastity", "description": "You can try, but it won't go in. Anywhere."},
         {"color": "red", "effect": "Pain for Pleasure", "description": "Pleasure and pain are completely flipped. Things that would normally cause pleasure hurt instead, and vice versa."},
-        {"color": "red", "effect": "On the Other Hand", "description": "Right-handers become lefties, and vice versa, but you will still habitually try to use your previously dominant hand... with the amount of skill your non-dominant hand would have. This also applies to legs/feet."}
+        {"color": "red", "effect": "On the Other Hand", "description": "Right-handers become lefties, and vice versa, but you will still habitually try to use your previously dominant hand... with the amount of skill your non-dominant hand would have. This also applies to legs/feet.f"}
+    ],
+    "!curses": [
+        "Heck!",
+        "Shucks!",
+        "Dang!",
+        "Darn it!",
+        "Fudge!",
+        "Phooey!",
+        "Nuts!",
+        "Dang it all to heck!",
+        "Hecking dang it!",
+        "Alack!",
+        "Alas!",
+        "Alay!",
+        "Alack, alas, alay!",
+        "Nuts!",
+        "Aww, heck.",
+        "Shoot!"
     ],
     "8ball": [
         {"color": "red", "text": "Don't count on it."},

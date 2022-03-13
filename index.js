@@ -440,6 +440,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, drRules)
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, helpText)
+    } else if (xmessage === '!curses') {
+        sendMSG(channel, getRandomItem('!curses'))
     } else if (xmessage.startsWith('!dr')) {
         deathRoll(xmessage, character, channel)
     } else if (character === 'Athena Esparza') {
