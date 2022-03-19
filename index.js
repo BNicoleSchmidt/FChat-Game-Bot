@@ -374,7 +374,8 @@ const helpText = `List of available commands:
         ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
         ${formatCommands(['!8ball', '!8ball <question>'])}: Seek answers from a higher power
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
-        ${formatCommands(randomEffectCommands)}: Create a random effect from the given category
+        ${formatCommands(['!random'])}: Produce a random item from any of the above categories
+        ${formatCommands(randomEffectCommands)}: Inflict a random curse
         ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
@@ -425,6 +426,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (randomItemCommands.includes(xmessage)) {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
+    } else if (xmessage === '!random') {
+        sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(getRandom(randomItemCommands)), 'blue'))}!`)
     } else if (randomEffectCommands.includes(xmessage)) {
         const effect = getRandomItem(xmessage)
         sendMSG(channel, `/me calls forth a ${boldText(color(capitalize(xmessage.substr(1)) + ' of ' + effect.effect, effect.color))}! ${boldText(color(effect.description, 'white'))}`)

@@ -397,7 +397,17 @@
         "Alack, alas, alay!",
         "Nuts!",
         "Aww, heck.",
-        "Shoot!"
+        "Shoot!",
+        "Egad!",
+        "Balderdash!",
+        "Dadgummit!",
+        "Geez!",
+        "Drat!",
+        "Aw gee!",
+        "Frak!",
+        "Son of a biscuit!",
+        "Oof!",
+        "Fiddlesticks!"
     ],
     "8ball": [
         {"color": "red", "text": "Don't count on it."},
