@@ -77,7 +77,16 @@
         "bowl of cereal",
         "Belgian waffle",
         "can of whipped cream",
-        "basket of Cheddar Bay biscuits"
+        "basket of Cheddar Bay biscuits",
+        "pint of Ben & Jerry's Phish Food",
+        "pint of Ben & Jerry's Americone Dream",
+        "loaded baked potato",
+        "turducken",
+        "complete Thanksgiving dinner spread for 6",
+        "pack of Trident",
+        "pack of Big Red",
+        "plate of deep fried pickle nickels",
+        "deep fried Oreo"
     ],
     "!berry": [
         "Aguav berry",
@@ -213,7 +222,13 @@
         "chocolate milkshake",
         "vanilla milkshake",
         "banana milkshake",
-        "jug of red Kool-Aid"
+        "jug of red Kool-Aid",
+        "protein shake",
+        "strawberry Ramune",
+        "blueberry Ramune",
+        "Shamrock shake",
+        "2-liter bottle of grape Faygo",
+        "can of Tab"
     ],
     "!potion": [
         "potion of lust",
@@ -252,12 +267,12 @@
         "potion of love",
         "potion of heat/rut",
         "potion of truth",
-        "potion of deceit",
         "potion of numbness",
         "potion of sensitivity",
         "potion of femininity",
         "potion of masculinity",
-        "potion of hallucination"
+        "potion of hallucination",
+        "potion of aura sight"
     ],
     "!toy": [
         "canine dildo with a knot",
@@ -379,7 +394,9 @@
         {"color": "red", "effect": "Cassandra", "description": "No one believes a word you say, whether you're telling the truth or not."},
         {"color": "red", "effect": "Chastity", "description": "You can try, but it won't go in. Anywhere."},
         {"color": "red", "effect": "Pain for Pleasure", "description": "Pleasure and pain are completely flipped. Things that would normally cause pleasure hurt instead, and vice versa."},
-        {"color": "red", "effect": "On the Other Hand", "description": "Right-handers become lefties, and vice versa, but you will still habitually try to use your previously dominant hand... with the amount of skill your non-dominant hand would have. This also applies to legs/feet."}
+        {"color": "red", "effect": "On the Other Hand", "description": "Right-handers become lefties, and vice versa, but you will still habitually try to use your previously dominant hand... with the amount of skill your non-dominant hand would have. This also applies to legs/feet."},
+        {"color": "red", "effect": "the Lyricist", "description": "You can only speak in song lyrics, though they can be from any song you know."},
+        {"color": "red", "effect": "the Palette Swap", "description": "Every part of you is a different color than it started. Hair, skin, eyes, lips, feathers, stripes, tattoos, markings... everything is different."}
     ],
     "!curses": [
         "Heck!",
@@ -437,7 +454,10 @@
         {"color": "green", "text": "Yes."},
         {"color": "green", "text": "Signs point to yes."},
         {"color": "green", "text": "Fuck yes."},
-        {"color": "green", "text": "Well, obviously."}
+        {"color": "green", "text": "Well, obviously."},
+        {"color": "green", "text": "Most assuredly."},
+        {"color": "green", "text": "Of course."},
+        {"color": "green", "text": "High probability."}
     ],
     "athena": [
         "/me produces a [b][color=blue]Milk-Bone[/color][/b].",
@@ -445,6 +465,7 @@
         "/me produces a [b][color=blue]dog biscuit[/color][/b].",
         "/me produces a [b][color=blue]peanut butter treat[/color][/b].",
         "/me produces a [b][color=blue]rawhide chew stick[/color][/b].",
+        "/me produces a [b][color=blue]t-bone steak[/color][/b].",
         "/me produces a [b][color=blue]cow femur[/color][/b].",
         "/me produces a [b][color=blue]pig ear[/color][/b].",
         "/me produces a [b][color=blue]squeaky rubber squirrel toy[/color][/b].",
