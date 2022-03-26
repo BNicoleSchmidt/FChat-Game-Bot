@@ -363,6 +363,8 @@ const todRuleCommands = ['!tod help', '!tod help', '!rulestod', '!rules tod', '!
 const drRuleCommands = ['!dr help', '!drhelp', '!rulesdr', '!drrules', '!rules dr', '!dr rules', '!help dr']
 const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
 
+const teapot = `/me beeps, then spins around in a circle before singing in a tinny, robotic voice. "I'm a little teabot, short and stout. Here is my input, here is my out. When I get all booted up, hear my sound. ERR 404 - LYRIC NOT FOUND."`
+
 const helpText = `List of available commands:
         ${formatCommands(joinCommands)}: Join a game
         ${formatCommands(leaveCommands)}: Leave a game
@@ -449,6 +451,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, getRandomItem('!curses'))
     } else if (xmessage.startsWith('!dr')) {
         deathRoll(xmessage, character, channel)
+    } else if (xmessage === '!418') {
+        sendMSG(channel, teapot)
     } else if (badBotRegex.test(xmessage)) {
         sendPRI('Mitena Twoheart', `Channel: ${channel} - Matched 'bad bot' in message: \r${message}`)
     } else if (character === 'Athena Esparza') {
