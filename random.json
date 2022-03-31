@@ -396,7 +396,9 @@
         {"color": "red", "effect": "Pain for Pleasure", "description": "Pleasure and pain are completely flipped. Things that would normally cause pleasure hurt instead, and vice versa."},
         {"color": "red", "effect": "On the Other Hand", "description": "Right-handers become lefties, and vice versa, but you will still habitually try to use your previously dominant hand... with the amount of skill your non-dominant hand would have. This also applies to legs/feet."},
         {"color": "red", "effect": "the Lyricist", "description": "You can only speak in song lyrics, though they can be from any song you know."},
-        {"color": "red", "effect": "the Palette Swap", "description": "Every part of you is a different color than it started. Hair, skin, eyes, lips, feathers, stripes, tattoos, markings... everything is different."}
+        {"color": "red", "effect": "the Palette Swap", "description": "Every part of you is a different color than it started. Hair, skin, eyes, lips, feathers, stripes, tattoos, markings... everything is different."},
+        {"color": "red", "effect": "Constant Itching", "description": "There's an awful itch that won't go away. Whenever you try to scratch it, it just moves somewhere else on your body."},
+        {"color": "red", "effect": "Plushification", "description": "You turn into a plushie version of yourself. Soft fabric, seams, and some kind of stuffing (cotton, fiberfill, foam bits, beanie-baby style balls). You can still move around and feel everything."}
     ],
     "!curses": [
         "Heck!",
@@ -465,9 +467,7 @@
         "/me produces a [b][color=blue]dog biscuit[/color][/b].",
         "/me produces a [b][color=blue]peanut butter treat[/color][/b].",
         "/me produces a [b][color=blue]rawhide chew stick[/color][/b].",
-        "/me produces a [b][color=blue]t-bone steak[/color][/b].",
         "/me produces a [b][color=blue]cow femur[/color][/b].",
-        "/me produces a [b][color=blue]pig ear[/color][/b].",
         "/me produces a [b][color=blue]squeaky rubber squirrel toy[/color][/b].",
         "/me produces a [b][color=blue]squeaky bone toy[/color][/b].",
         "/me produces a [b][color=blue]teddy bear[/color][/b].",

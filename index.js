@@ -399,6 +399,7 @@ const drRules = `Death Roll Rules (And suggestions):
         The numbers will gradually go down until a player eventually rolls a ${boldText('1')}. That player loses!`
 
 const badBotRegex = new RegExp(/\bbad bot\b/, 'i')
+const goodBotRegex = new RegExp(/\bgood bot\b/, 'i')
 
 fchat.on("MSG", async ({ character, message, channel }) => {
     const xmessage = message.toLowerCase().trim()
@@ -453,8 +454,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         deathRoll(xmessage, character, channel)
     } else if (xmessage === '!418') {
         sendMSG(channel, teapot)
-    } else if (badBotRegex.test(xmessage)) {
-        sendPRI('Mitena Twoheart', `Channel: ${channel} - Matched 'bad bot' in message: \r${message}`)
+    } else if (badBotRegex.test(xmessage) || goodBotRegex.test(xmessage)) {
+        sendMSG(channel, `/me is a ${boldText('very good')} bot.`)
     } else if (character === 'Athena Esparza') {
         const triggers = [
             eicon('dognoise'),
@@ -484,7 +485,7 @@ fchat.on('PRI', async ({ character, message }) => {
         sendPRI(character, drRules)
     } else if (helpCommands.includes(xmessage)) {
         sendPRI(character, helpText)
-    } else if (character === 'Mitena Twoheart') {
+    } else if (['Mitena Twoheart', 'Jingly Isabelle'].includes(character)) {
         if (message.includes('|')) {
             let [channel, command] = message.split('|')
             sendMSG(channel, command)
