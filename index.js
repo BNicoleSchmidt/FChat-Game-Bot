@@ -276,11 +276,8 @@ function rollDice(dice, character, channel) {
 }
 
 function performDeathRoll(dice, character, channel) {
-    const whammy = getRandom([true, false])
-    if (whammy) {
-        delete deathRollTracker[channel]
-        sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText('WHAMMY!')}! You auto-lose. Happy April Fools!`)
-    } else if (result === 1) {
+    const result = randomNumber(dice)
+    if (result === 1) {
         delete deathRollTracker[channel]
         sendMSG(channel, `DEATH ROLL: ${wrapInUserTags(character)} rolls vs ${dice}: ${boldText(1)}! ${eicon(dice > 10 ? 'nuke' : 'blobcatbongoping')}`)
     } else {
