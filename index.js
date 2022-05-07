@@ -228,7 +228,7 @@ function twister(channel) {
     const ccolor = getRandom(['red', 'yellow', 'green', 'blue'])
     const side = getRandom(['Right', 'Left'])
     const limb = getRandom(['Hand', 'Foot'])
-    sendMSG(channel, `The spinner points to:   ${boldText(`${side} ${limb} ${color(capitalize(ccolor), ccolor)}!`)}`)
+    sendMSG(channel, `The spinner points to: ${boldText(`${side} ${limb} ${color(capitalize(ccolor), ccolor)}!`)}`)
 }
 
 function rollDice(dice, character, channel) {
