@@ -224,6 +224,13 @@ function getPokemon(channel, character) {
     sendMSG(channel, `${getRandom(prefixes)} ${result}, ${wrapInUserTags(character)}?`)
 }
 
+function twister(channel) {
+    const ccolor = getRandom(['red', 'yellow', 'green', 'blue'])
+    const side = getRandom(['Right', 'Left'])
+    const limb = getRandom(['Hand', 'Foot'])
+    sendMSG(channel, `The spinner points to:   ${boldText(`${side} ${limb} ${color(capitalize(ccolor), ccolor)}!`)}`)
+}
+
 function rollDice(dice, character, channel) {
     if (dice.includes('rick')) {
         sendMSG(channel, `${wrapInUserTags(character)} rolls the Rick: [url=https://www.youtube.com/watch?v=dQw4w9WgXcQ]Roll[/url] ${eicon('rickroll')}`)
@@ -375,6 +382,7 @@ const helpText = `List of available commands:
         ${formatCommands(['!roll #', '!roll #d#'])}: Roll dice
         ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
         ${formatCommands(['!8ball', '!8ball <question>'])}: Seek answers from a higher power
+        ${formatCommands(['!twister'])}: Use a Twister spinner (Right Foot Blue!)
         ${formatCommands(randomItemCommands)}: Produce a random item from the given category
         ${formatCommands(['!random'])}: Produce a random item from any of the above categories
         ${formatCommands(randomEffectCommands)}: Inflict a random curse
@@ -436,6 +444,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, `/me calls forth a ${boldText(color(capitalize(xmessage.substr(1)) + ' of ' + effect.effect, effect.color))}! ${boldText(color(effect.description, 'white'))}`)
     } else if (xmessage === '!pokemon') {
         getPokemon(channel, character)
+    } else if (xmessage === '!twister') {
+        twister(channel)
     } else if (xmessage.startsWith("!8ball")) {
         const result = getRandomItem('8ball')
         sendMSG(channel, `Magic 8 Ball says: ${boldText(color(result.text, result.color))}`)
