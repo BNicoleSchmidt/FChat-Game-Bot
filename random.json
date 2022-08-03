@@ -90,7 +90,17 @@
         "peanut butter and jelly sandwich",
         "crispy chicken sandwich",
         "bowl of beef stew",
-        "can of Spaghetti-Os"
+        "can of Spaghetti-Os",
+        "corndog",
+        "bunch of tater tots",
+        "soft pretzel with cheese",
+        "churro",
+        "Baconator with cheese",
+        "family size bag of Funyuns",
+        "plate of onion rings",
+        "breakfast burrito",
+        "breakfast pizza",
+        "strawberry shortcake"
     ],
     "!berry": [
         "Aguav berry",
@@ -278,7 +288,8 @@
         "potion of femininity",
         "potion of masculinity",
         "potion of hallucination",
-        "potion of aura sight"
+        "potion of aura sight",
+        "potion of elasticity"
     ],
     "!toy": [
         "canine dildo with a knot",
@@ -365,7 +376,9 @@
         "t-rex inflatable costume",
         "knight's tunic, a plastic breastplate and helmet, and a wooden sword and shield",
         "ballerina leotard, tutu, tights and pointe shoes",
-        "nurse's cap, a short, low-cut v-neck gown, and a comically oversized hypodermic needle (with blunt point.)"
+        "nurse's cap, a short, low-cut v-neck gown, and a comically oversized hypodermic needle (with blunt point.)",
+        "construction worker's safety vest, tool belt, and hard hat",
+        "fig leaf on a leather cord"
     ],
     "!misc": [
         "tennis ball",
@@ -445,7 +458,20 @@
         "bottle of aspirin",
         "portable hole",
         "hammer",
-        "notebook of bad high school poetry"
+        "notebook of bad high school poetry",
+        "lotion bottle",
+        "newest edition Dungeon Master's Guide",
+        "Burger King crown",
+        "Banjo-Kazooie N64 cartridge",
+        "pink axolotl plushie",
+        "Steam Deck",
+        "pair of boxers",
+        "Ring Fit",
+        "pool cue",
+        "book of sudoku puzzles",
+        "box of 64 Crayola crayons",
+        "coloring book",
+        "counterfeit Mona Lisa"
     ],
     "!curse": [
         {"color": "red", "effect": "Pride", "description": "What curse? You're just the fucking best."},
