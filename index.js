@@ -364,7 +364,7 @@ const statusCommands = ['!ready', '!status', '!players', '!playing', '!list']
 const bottleSpinCommands = ['!spin', '!bottle']
 const spinbackCommands = ['!spinback', '!togglespinback']
 const helpCommands = ['!help', '!commands', '!info']
-const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!costume', '!toy', '!bondage', '!misc']
+const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!costume', '!minion', '!toy', '!bondage', '!misc']
 const randomEffectCommands = ['!curse']
 const todRuleCommands = ['!tod help', '!tod help', '!rulestod', '!rules tod', '!todrules', '!tod rules', '!help tod']
 const drRuleCommands = ['!dr help', '!drhelp', '!rulesdr', '!drrules', '!rules dr', '!dr rules', '!help dr']
@@ -460,6 +460,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, helpText)
     } else if (xmessage === '!curses') {
         sendMSG(channel, getRandomItem('!curses'))
+    } else if (xmessage === '!mist') {
+        sendMSG(channel, getRandom(['Fog', 'Haze', 'Steam', 'Vapor', 'Cloud']) + '! ... You probably meant !misc, but you can try again.')
     } else if (xmessage.startsWith('!dr')) {
         deathRoll(xmessage, character, channel)
     } else if (xmessage === '!418') {
@@ -499,9 +501,14 @@ fchat.on('PRI', async ({ character, message }) => {
         if (message.includes('|')) {
             let [channel, command] = message.split('|')
             sendMSG(channel, command)
-        } else {
-            sendPRI(character, message)
-        }      
+        } else if (message === '!update') {
+            const channels = await Channel.query()
+            for (const channel of channels) {
+                sendMSG(channel.id, boldText(color('Alert: Incoming update. System will restart soon. Any in-progress Death Rolls will be lost. Truth or Dare games are safe. Restart should take less than five minutes.', 'red')))
+            }
+        }    
+    } else {
+        sendPRI(character, "Only help commands are valid in private messages. If you would like to access other commands, they must be used in a room.")
     }
 })
 
