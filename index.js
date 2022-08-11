@@ -387,6 +387,7 @@ const helpText = `List of available commands:
         ${formatCommands(['!random'])}: Produce a random item from any of the above categories
         ${formatCommands(randomEffectCommands)}: Inflict a random curse
         ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
+        ${formatCommands(['!beef'])}: Generate a beefy name (Big McLargehuge!)
         ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
         ${formatCommands(drRuleCommands)}: Show rules for Death Roll
@@ -458,6 +459,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, drRules)
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, helpText)
+    } else if (xmessage === '!beef') {
+        sendMSG(channel, boldText(color(`${getRandomItem('beef1')} ${getRandomItem('beef2')}${getRandomItem('beef3')}!`, 'yellow')))
     } else if (xmessage === '!curses') {
         sendMSG(channel, getRandomItem('!curses'))
     } else if (xmessage === '!mist') {
@@ -497,7 +500,7 @@ fchat.on('PRI', async ({ character, message }) => {
         sendPRI(character, drRules)
     } else if (helpCommands.includes(xmessage)) {
         sendPRI(character, helpText)
-    } else if (['Mitena Twoheart', 'Jingly Isabelle'].includes(character)) {
+    } else if (['Mitena Twoheart', 'Jingly Isabelle', 'Playingway', 'Failenn', 'Lapina Lunara'].includes(character)) {
         if (message.includes('|')) {
             let [channel, command] = message.split('|')
             sendMSG(channel, command)
