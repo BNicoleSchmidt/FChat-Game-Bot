@@ -378,6 +378,7 @@ const helpText = `List of available commands:
         ${formatCommands(statusCommands)}: Check current players
         ${formatCommands(['!kick <name>'])}: Kick a player from a game (Not case sensitive, but must be full name)
         ${formatCommands(bottleSpinCommands)}: Spin the bottle
+        ${formatCommands(spinbackCommands)}: Toggle spinback prevention
         ${formatCommands(coinCommands)}: Flip a coin
         ${formatCommands(['!roll #', '!roll #d#'])}: Roll dice
         ${formatCommands(['!dr #', '!dr'])}: Start or continue a Death Roll
@@ -387,8 +388,8 @@ const helpText = `List of available commands:
         ${formatCommands(['!random'])}: Produce a random item from any of the above categories
         ${formatCommands(randomEffectCommands)}: Inflict a random curse
         ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
-        ${formatCommands(['!beef'])}: Generate a beefy name (Big McLargehuge!)
-        ${formatCommands(spinbackCommands)}: Toggle spinback prevention
+        ${formatCommands(['!beef'])}: Generate a beefy name ([url=https://www.youtube.com/watch?v=RFHlJ2voJHY]Big McLargehuge![/url])
+        ${formatCommands(['!leve'])}: Get a random leve (FFXIV quest)
         ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
         ${formatCommands(drRuleCommands)}: Show rules for Death Roll
         ${formatCommands(helpCommands)}: Show this message`
@@ -459,6 +460,15 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         sendMSG(channel, drRules)
     } else if (helpCommands.includes(xmessage)) {
         sendMSG(channel, helpText)
+    } else if (xmessage === '!leve') {
+        const leveType = getRandom(['escort', 'hunt', 'eliminate'])
+        if (leveType === 'hunt') {
+            sendMSG(channel, color(`Hunt down and harvest the needed materials from ${boldText(randomNumber(12) + ' ' +getRandomItem('enemy'))} for the ${getRandomItem('race')} ${getRandomItem('occupation')} who needs them.`, 'yellow'))
+        } else if (leveType === 'eliminate') {
+            sendMSG(channel, color(`Eliminate ${boldText(randomNumber(12) + ' ' + getRandomItem('enemy'))} for the ${getRandomItem('race')} ${getRandomItem('occupation')} who is being ${getRandom(['threatened', 'harassed', 'mildly inconvenienced'])} by them.`, 'yellow'))
+        } else if (leveType === 'escort') {
+            sendMSG(channel, color(`Escort the ${getRandomItem('race')} ${getRandomItem('occupation')} to ${getRandomItem('location')}.`, 'yellow'))
+        }
     } else if (xmessage === '!beef') {
         sendMSG(channel, boldText(color(`${getRandomItem('beef1')} ${getRandomItem('beef2')}${getRandomItem('beef3')}!`, 'yellow')))
     } else if (xmessage === '!curses') {
