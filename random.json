@@ -113,7 +113,10 @@
         "giant carrot",
         "bundt cake",
         "pineapple upside-down cake",
-        "dozen chocolate covered strawberries"
+        "dozen chocolate covered strawberries",
+        "cotton candy on a paper cone",
+        "funnel cake",
+        "frozen chocolate covered banana on a stick"
     ],
     "!berry": [
         "Aguav berry",
@@ -361,7 +364,8 @@
         "queening chair",
         "stockade",
         "labia spreader",
-        "leather harness"
+        "leather harness",
+        "pillory"
     ],
     "!costume": [
         "pair of butterfly wings and an antennae headband",
@@ -403,11 +407,11 @@
         "tennis ball",
         "daisy",
         "lantern",
-        "wind-up tonberry",
         "teddy bear",
         "twelve-sided die",
         "Furby",
         "Bop-It",
+        "Skip-It",
         "ship in a bottle",
         "deck of Uno cards",
         "trashy romance novel",
@@ -490,7 +494,10 @@
         "book of sudoku puzzles",
         "box of 64 Crayola crayons",
         "coloring book",
-        "counterfeit Mona Lisa"
+        "counterfeit Mona Lisa",
+        "hula hoop",
+        "folding chair",
+        "betta fish in a little aquarium"
     ],
     "!curse": [
         {"color": "red", "effect": "Pride", "description": "What curse? You're just the fucking best."},
@@ -569,6 +576,13 @@
         "Fiddlesticks!"
     ],
     "!minion": [
+        "Clockwork Cerulean Chaser",
+        "Clockwork Crimson Chaser",
+        "Felicitous Fuzzball",
+        "Wind-up Erichthonios",
+        "Clockwork Solus",
+        "Pterosquirrel",
+        "Wind-up Scarmiglione",
         "Wind-up Arkasodara",
         "Wind-up Ragnarok",
         "Clockwork Novus D",
@@ -1180,7 +1194,15 @@
         "Tengu",
         "Tonberry",
         "Vanu Vanu",
-        "Vath"
+        "Vath",
+        "Hyur",
+        "Elezen",
+        "Roegaedyn",
+        "Au Ra",
+        "Hrothgar",
+        "Lalafell",
+        "Viera",
+        "Miqo'te"
     ],
     "occupation": [
         "guard",
