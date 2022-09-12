@@ -116,7 +116,8 @@
         "dozen chocolate covered strawberries",
         "cotton candy on a paper cone",
         "funnel cake",
-        "frozen chocolate covered banana on a stick"
+        "frozen chocolate covered banana on a stick",
+        "clamsicle"
     ],
     "!berry": [
         "Aguav berry",
@@ -545,7 +546,8 @@
         {"color": "red", "effect": "the Lyricist", "description": "You can only speak in song lyrics, though they can be from any song you know."},
         {"color": "red", "effect": "the Palette Swap", "description": "Every part of you is a different color than it started. Hair, skin, eyes, lips, feathers, stripes, tattoos, markings... everything is different."},
         {"color": "red", "effect": "Constant Itching", "description": "There's an awful itch that won't go away. Whenever you try to scratch it, it just moves somewhere else on your body."},
-        {"color": "red", "effect": "Plushification", "description": "You turn into a plushie version of yourself. Soft fabric, seams, and some kind of stuffing (cotton, fiberfill, foam bits, beanie-baby style balls). You can still move around and feel everything."}
+        {"color": "red", "effect": "Plushification", "description": "You turn into a plushie version of yourself. Soft fabric, seams, and some kind of stuffing (cotton, fiberfill, foam bits, beanie-baby style balls). You can still move around and feel everything."},
+        {"color": "red", "effect": "Pins and Needles", "description": "At least one of your limbs is asleep at all times, though it may be at different stages. Numbness, pins and needles, stiffness, cramping..."}
     ],
     "!curses": [
         "Heck!",
