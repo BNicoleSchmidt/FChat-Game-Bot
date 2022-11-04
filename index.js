@@ -50,7 +50,7 @@ class Channel extends Model {
     }
 }
 
-const db_url = process.env.DATABASE_URL
+const db_url = process.env.HEROKU_POSTGRESQL_BRONZE_URL
 var db_url_groups = db_url.match(/^.*\/\/(.*):(.*)@(.*):.*\/(.*)$/)
 var dbUser = db_url_groups[1]
 var dbPw = db_url_groups[2]
