@@ -773,7 +773,7 @@
         "Wind-up Ravana",
         "Wind-up Kojin",
         "Axolotl Eft",
-        "Salt &amp; Pepper Seal",
+        "Salt & Pepper Seal",
         "Koala Joey",
         "Mameshiba",
         "Wind-up Ixion",
@@ -1626,6 +1626,16 @@
         "the Ruby Sea",
         "Sui-no-Sato",
         "Isari"
+    ],
+    "astrologian": [
+        {"name": "The Balance", "arcana": "Solar", "class": "melee"},
+        {"name": "The Bole", "arcana": "Solar", "class": "ranged"},
+        {"name": "The Arrow", "arcana": "Lunar", "class": "melee"},
+        {"name": "The Ewer", "arcana": "Lunar", "class": "ranged"},
+        {"name": "The Spear", "arcana": "Celestial", "class": "melee"},
+        {"name": "The Spire", "arcana": "Celestial", "class": "ranged"},
+        {"name": "The Lord of Crowns", "class": "melee"},
+        {"name": "The Lady of Crowns", "class": "ranged"}
     ],
     "athena": [
         "/me produces a [b][color=blue]Milk-Bone[/color][/b].",

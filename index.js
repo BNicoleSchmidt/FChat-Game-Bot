@@ -342,7 +342,7 @@ fchat.on("JCH", async ({ channel, character, title }) => {
         console.log('Joined channel', title)
         const existing = await Channel.query().findById(channel).update({pending: false})
         if (!existing) {
-            await Channel.query().insert({id: channel, title, spinback: true})
+            await Channel.query().insert({id: channel, title})
         }
     }
 })
@@ -511,7 +511,13 @@ fchat.on('PRI', async ({ character, message }) => {
     } else if (helpCommands.includes(xmessage)) {
         sendPRI(character, helpText)
     } else if (['Mitena Twoheart', 'Jingly Isabelle', 'Playingway', 'Failenn', 'Lapina Lunara'].includes(character)) {
-        if (message.includes('|')) {
+        if (message.startsWith('!announce')) {
+            const announcement = message.substr(10)
+            const channels = await Channel.query()
+            for (const channel of channels) {
+                sendMSG(channel.id, boldText('Announcement: ') + announcement)
+            }
+        } else if (message.includes('|')) {
             let [channel, command] = message.split('|')
             sendMSG(channel, command)
         } else if (message === '!update') {
@@ -519,7 +525,7 @@ fchat.on('PRI', async ({ character, message }) => {
             for (const channel of channels) {
                 sendMSG(channel.id, boldText(color('Alert: Incoming update. System will restart soon. Any in-progress Death Rolls will be lost. Truth or Dare games are safe. Restart should take less than five minutes.', 'red')))
             }
-        }    
+        }
     } else {
         sendPRI(character, "Only help commands are valid in private messages. If you would like to access other commands, they must be used in a room.")
     }
