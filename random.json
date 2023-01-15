@@ -263,7 +263,8 @@
         "can of Tab",
         "cherry limeade",
         "frozen lemonade",
-        "mint lassi"
+        "mint lassi",
+        "Hawaiian Punch"
     ],
     "!potion": [
         "potion of lust",
@@ -308,7 +309,11 @@
         "potion of masculinity",
         "potion of hallucination",
         "potion of aura sight",
-        "potion of elasticity"
+        "potion of elasticity",
+        "potion of additional appendages",
+        "potion of courage",
+        "potion of fear",
+        "potion of telekinesis"
     ],
     "!toy": [
         "canine dildo with a knot",
@@ -403,7 +408,11 @@
         "fig leaf on a leather cord",
         "classic white mage robe with red accents",
         "black mage robe with a pointy hat",
-        "black and white striped shirt, black pants, and a thief mask"
+        "black and white striped shirt, black pants, and a thief mask",
+        "doctor's coat, rubber gloves, and a stethoscope",
+        "police officer's uniform with a badge and paintball pistol",
+        "fancy white bridal gown with a veil and bouquet",
+        "bunch of mummy wrappings"
     ],
     "!misc": [
         "tennis ball",
@@ -499,7 +508,19 @@
         "counterfeit Mona Lisa",
         "hula hoop",
         "folding chair",
-        "betta fish in a little aquarium"
+        "betta fish in a little aquarium",
+        "movie poster from Rocky Horror Picture Show",
+        "wooden ocarina",
+        "La-Z-Boy recliner",
+        "Tickle Me Elmo",
+        "white whale plushie",
+        "concert t-shirt from a band no one's heard of",
+        "mortar and pestle",
+        "Magic Eye book",
+        "yoga mat",
+        "wooden ruler",
+        "box of tissues",
+        "Tamagotchi"
     ],
     "!curse": [
         {"color": "red", "effect": "Pride", "description": "What curse? You're just the fucking best."},
@@ -548,7 +569,8 @@
         {"color": "red", "effect": "the Palette Swap", "description": "Every part of you is a different color than it started. Hair, skin, eyes, lips, feathers, stripes, tattoos, markings... everything is different."},
         {"color": "red", "effect": "Constant Itching", "description": "There's an awful itch that won't go away. Whenever you try to scratch it, it just moves somewhere else on your body."},
         {"color": "red", "effect": "Plushification", "description": "You turn into a plushie version of yourself. Soft fabric, seams, and some kind of stuffing (cotton, fiberfill, foam bits, beanie-baby style balls). You can still move around and feel everything."},
-        {"color": "red", "effect": "Pins and Needles", "description": "At least one of your limbs is asleep at all times, though it may be at different stages. Numbness, pins and needles, stiffness, cramping..."}
+        {"color": "red", "effect": "Pins and Needles", "description": "At least one of your limbs is asleep at all times, though it may be at different stages. Numbness, pins and needles, stiffness, cramping..."},
+        {"color": "red", "effect": "the Wardrobe Malfunction", "description": "Whatever can go wrong will go wrong, at least as far as your clothing is concerned. Accidental exposure is practically inevitable (unless you're already nude of course)."}
     ],
     "!curses": [
         "Heck!",
