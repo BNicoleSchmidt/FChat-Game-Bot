@@ -557,7 +557,7 @@ setInterval(function ping() {
     } catch (err) {
         console.log(err)
     }
-}, 30000);
+}, 45000);
 
 setInterval(function send() {
     const msg = messageQueue.shift(1)
