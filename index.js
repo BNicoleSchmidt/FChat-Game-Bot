@@ -209,6 +209,50 @@ function getRandomItem(category) {
     return getRandom(random[category])
 }
 
+/*
+    Randomly determines if an item (todo: consider adding to things like Pokemon too?) has "rarity" associated with it.
+    We likely want this to be non-interruptive and special, so setting to a pretty rare setting (5% at time of writing).
+    Currently this just gives a rarity so the players can make up what they mean, but perhaps we can add modifiers
+    associated with them later!
+ */
+function getItemRarity() {
+    // Base 5%, move this up or down to make "rare" items appear more or less frequently!
+    const rarityChance = 0.05
+
+    // 10% chance to "step" up in rarity to rare, then to legendary, and so on. Enables us to shift the rarity chance
+    // without needing to recalculate all the rarity odds each time.
+    const rarityUpgradeChance = 0.1
+
+    // Empty will tell us later to not change the item text at all.
+    let rarity = ''
+    let color = ''
+
+    // Keep sorted in order from least rare -> most rare
+    let rarities = ['Uncommon', 'Rare', 'Legendary', 'Mythical']
+    const colorMap = {
+        Common: '',
+        Uncommon: 'green',
+        Rare: 'cyan',
+        Legendary: 'orange',
+        Mythical: 'red' // Not sure about this one yet.
+    }
+
+    // If an item is rare, determine how rare.
+    if (Math.random() <= rarityChance) {
+        for (let i = 0; i <= rarities.length; i++) {
+            // If we don't hit an upgrade or can't upgrade any further, lock in our value. For example, failing the
+            // first roll would be uncommon, and the terminal case is mythical.
+            if (Math.random() > rarityUpgradeChance || i === rarities.length - 1) {
+                rarity = rarities[i]
+                color = colorMap[rarity]
+                break
+            }
+        }
+    }
+
+    return {rarity, color}
+}
+
 function getPokemonGender(rate) {
     if (rate === -1) {
         return color('Genderless', 'gray')
@@ -438,12 +482,15 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         await Channel.query().findById(channel).update({spinback: newSetting})
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (randomItemCommands.includes(xmessage)) {
-        sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
+        const rarityMod = getItemRarity()
+        sendMSG(channel, `/me produces a ${rarityMod.rarity ? boldText(color(rarityMod.rarity + ' ', rarityMod.color)) : ''}${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
     } else if (xmessage === '!random') {
-        sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(getRandom(randomItemCommands)), 'blue'))}!`)
+        const rarityMod = getItemRarity()
+        sendMSG(channel, `/me produces a ${rarityMod.rarity ? boldText(color(rarityMod.rarity + ' ', rarityMod.color)) : ''}${boldText(color(getRandomItem(getRandom(randomItemCommands)), 'blue'))}!`)
     } else if (randomEffectCommands.includes(xmessage)) {
+        const rarityMod = getItemRarity()
         const effect = getRandomItem(xmessage)
-        sendMSG(channel, `/me calls forth a ${boldText(color(capitalize(xmessage.substr(1)) + ' of ' + effect.effect, effect.color))}! ${boldText(color(effect.description, 'white'))}`)
+        sendMSG(channel, `/me calls forth a ${rarityMod.rarity ? boldText(color(rarityMod.rarity + ' ', rarityMod.color)) : ''}${boldText(color(capitalize(xmessage.substr(1)) + ' of ' + effect.effect, effect.color))}! ${boldText(color(effect.description, 'white'))}`)
     } else if (xmessage === '!pokemon') {
         getPokemon(channel, character)
     } else if (xmessage === '!twister') {
