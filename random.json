@@ -118,7 +118,15 @@
         "funnel cake",
         "frozen chocolate covered banana on a stick",
         "clamsicle",
-        "small sack of phallic fruit snack gummies"
+        "small sack of phallic fruit snack gummies",
+        "corn on the cob",
+        "Caesar salad",
+        "chicken pot pie",
+        "veggie pizza",
+        "bowl of pumpkin soup",
+        "giant eggplant",
+        "Cobb salad",
+        "can of green beans"
     ],
     "!berry": [
         "Aguav berry",
@@ -344,25 +352,35 @@
         "cat tail buttplug",
         "dog tail buttplug",
         "bunny tail buttplug",
+        "pony tail buttplug",
         "nubby glass dildo",
         "set of eggs with an ovipositor dildo",
         "fucking machine with multiple attachments",
         "remote controlled vibrator",
-        "strapless strap-on"
+        "strapless strap-on",
+        "Scottish tawse",
+        "vibrating e-stim wand",
+        "steel dildo",
+        "feather tickler",
+        "riding crop",
+        "leather flogger",
+        "speculum"
     ],
     "!bondage": [
         "pair of wrist cuffs",
         "leather collar and leash",
-        "pair of fishnet leggings",
         "set of nipple clamps",
         "ball gag",
         "ring gag",
+        "dog bone gag",
+        "bit gag",
         "spreader bar",
         "pair of ankle cuffs",
         "length of silk rope",
         "blindfold",
         "muzzle",
         "chastity belt",
+        "chastity cage",
         "metal cockring",
         "set of arm binders",
         "set of leg binders",
@@ -372,7 +390,12 @@
         "stockade",
         "labia spreader",
         "leather harness",
-        "pillory"
+        "pillory",
+        "St. Andrew's cross",
+        "spanking bench",
+        "remote controlled shock collar",
+        "roll of bondage tape",
+        "leather hogtie"
     ],
     "!costume": [
         "pair of butterfly wings and an antennae headband",
@@ -518,7 +541,16 @@
         "yoga mat",
         "wooden ruler",
         "box of tissues",
-        "Tamagotchi"
+        "Tamagotchi",
+        "pair of fishnet leggings",
+        "faded orchestrion roll",
+        "burlap sack",
+        "magically locked treasure chest",
+        "palm frond",
+        "Charlie's Angels DVD",
+        "monkey wrench",
+        "seashell",
+        "Nokia 3310"
     ],
     "!weapon": [
         "squeaky hammer",
@@ -539,7 +571,8 @@
         "paintball gun",
         "feather",
         "horse dildo",
-        "bubble gun"
+        "bubble gun",
+        "parasol"
     ],
     "!curse": [
         {"color": "red", "effect": "Pride", "description": "What curse? You're just the fucking best."},
