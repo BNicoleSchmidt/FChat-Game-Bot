@@ -47,8 +47,8 @@
         "genderRate": 1,
         "forms": [
             "normal",
-            "mega-x",
-            "mega-y",
+            "mega x",
+            "mega y",
             "gigantamax"
         ]
     },
@@ -169,7 +169,7 @@
         "forms": [
             "normal",
             "alolan",
-            "alolan totem"
+            "totem alolan"
         ]
     },
     {
@@ -210,21 +210,21 @@
         "genderRate": 4,
         "forms": [
             "normal",
-            "rock-star",
+            "rock star",
             "belle",
-            "pop-star",
+            "pop star",
             "phd",
             "libre",
             "cosplay",
-            "original-cap",
-            "hoenn-cap",
-            "sinnoh-cap",
-            "unova-cap",
-            "kalos-cap",
-            "alola-cap",
-            "partner-cap",
+            "original cap",
+            "hoenn cap",
+            "sinnoh cap",
+            "unova cap",
+            "kalos cap",
+            "alolan cap",
+            "partner cap",
             "starter",
-            "world-cap",
+            "world cap",
             "gigantamax"
         ]
     },
@@ -1034,7 +1034,7 @@
     },
     {
         "id": 122,
-        "name": "Mr Mime",
+        "name": "mr mime",
         "genderRate": 4,
         "forms": [
             "normal",
@@ -1088,9 +1088,9 @@
         "genderRate": 0,
         "forms": [
             "normal",
-            "paldea-combat-breed",
-            "paldea-blaze-breed",
-            "paldea-aqua-breed"
+            "paldea combat-breed",
+            "paldea blaze-breed",
+            "paldea aqua-breed"
         ]
     },
     {
@@ -1276,8 +1276,8 @@
         "genderRate": -1,
         "forms": [
             "normal",
-            "mega-x",
-            "mega-y"
+            "mega x",
+            "mega y"
         ]
     },
     {
@@ -3423,7 +3423,7 @@
         "name": "wormadam",
         "genderRate": 8,
         "forms": [
-            "normal",
+            "plant",
             "sandy",
             "trash"
         ]
@@ -3631,7 +3631,7 @@
     },
     {
         "id": 439,
-        "name": "mime-jr",
+        "name": "mime jr",
         "genderRate": 4,
         "forms": [
             "normal"
@@ -4029,7 +4029,7 @@
         "name": "giratina",
         "genderRate": -1,
         "forms": [
-            "normal",
+            "altered",
             "origin"
         ]
     },
@@ -4070,7 +4070,7 @@
         "name": "shaymin",
         "genderRate": -1,
         "forms": [
-            "normal",
+            "land",
             "sky"
         ]
     },
@@ -4538,9 +4538,9 @@
         "name": "basculin",
         "genderRate": 4,
         "forms": [
-            "normal",
-            "blue-striped",
-            "white-striped"
+            "red striped",
+            "blue striped",
+            "white striped"
         ]
     },
     {
@@ -4581,10 +4581,10 @@
         "name": "darmanitan",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "standard",
             "zen",
-            "galarian",
-            "zen galarian"
+            "galarian standard",
+            "galarian zen"
         ]
     },
     {
@@ -5278,7 +5278,7 @@
         "name": "tornadus",
         "genderRate": 0,
         "forms": [
-            "normal",
+            "incarnate",
             "therian"
         ]
     },
@@ -5287,7 +5287,7 @@
         "name": "thundurus",
         "genderRate": 0,
         "forms": [
-            "normal",
+            "incarnate",
             "therian"
         ]
     },
@@ -5312,7 +5312,7 @@
         "name": "landorus",
         "genderRate": 0,
         "forms": [
-            "normal",
+            "incarnate",
             "therian"
         ]
     },
@@ -5331,7 +5331,7 @@
         "name": "keldeo",
         "genderRate": -1,
         "forms": [
-            "normal",
+            "ordinary",
             "resolute"
         ]
     },
@@ -5340,7 +5340,7 @@
         "name": "meloetta",
         "genderRate": -1,
         "forms": [
-            "normal",
+            "aria",
             "pirouette"
         ]
     },
@@ -5422,7 +5422,7 @@
         "genderRate": 1,
         "forms": [
             "normal",
-            "battle-bond",
+            "battle bond",
             "ash"
         ]
     },
@@ -5608,7 +5608,7 @@
         "name": "aegislash",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "shield",
             "blade"
         ]
     },
@@ -5843,7 +5843,7 @@
         "name": "pumpkaboo",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "average",
             "small",
             "large",
             "super"
@@ -5854,7 +5854,7 @@
         "name": "gourgeist",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "average",
             "small",
             "large",
             "super"
@@ -5914,9 +5914,9 @@
         "name": "zygarde",
         "genderRate": -1,
         "forms": [
-            "normal",
-            "10-power-construct",
-            "50-power-construct",
+            "50",
+            "10 power construct",
+            "50 power construct",
             "complete",
             "10"
         ]
@@ -6107,7 +6107,7 @@
         "name": "oricorio",
         "genderRate": 6,
         "forms": [
-            "normal",
+            "baile",
             "pom-pom",
             "pau",
             "sensu"
@@ -6136,7 +6136,7 @@
         "genderRate": 4,
         "forms": [
             "normal",
-            "own-tempo"
+            "own tempo"
         ]
     },
     {
@@ -6144,7 +6144,7 @@
         "name": "lycanroc",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "midday",
             "midnight",
             "dusk"
         ]
@@ -6154,7 +6154,7 @@
         "name": "wishiwashi",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "solo",
             "school"
         ]
     },
@@ -6382,13 +6382,13 @@
         "name": "minior",
         "genderRate": -1,
         "forms": [
-            "normal",
-            "orange-meteor",
-            "yellow-meteor",
-            "green-meteor",
-            "blue-meteor",
-            "indigo-meteor",
-            "violet-meteor",
+            "red meteor",
+            "orange meteor",
+            "yellow meteor",
+            "green meteor",
+            "blue meteor",
+            "indigo meteor",
+            "violet meteor",
             "red",
             "orange",
             "yellow",
@@ -6428,10 +6428,10 @@
         "name": "mimikyu",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "disguised",
             "busted",
-            "disguised totem",
-            "busted totem"
+            "totem disguised",
+            "totem busted"
         ]
     },
     {
@@ -7017,10 +7017,10 @@
         "name": "toxtricity",
         "genderRate": 4,
         "forms": [
-            "normal",
-            "low-key",
-            "gigantax amped",
-            "gigantamax low-key"
+            "amped",
+            "low key",
+            "amped gigantamax",
+            "low key gigantamax"
         ]
     },
     {
@@ -7156,7 +7156,7 @@
     },
     {
         "id": 866,
-        "name": "Mr Rime",
+        "name": "mr rime",
         "genderRate": 4,
         "forms": [
             "normal"
@@ -7232,7 +7232,7 @@
         "name": "eiscue",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "ice",
             "noice"
         ]
     },
@@ -7249,7 +7249,7 @@
         "name": "morpeko",
         "genderRate": 4,
         "forms": [
-            "normal",
+            "full belly",
             "hangry"
         ]
     },
@@ -7375,10 +7375,10 @@
         "name": "urshifu",
         "genderRate": 1,
         "forms": [
-            "single-strike",
-            "rapid-strike",
-            "gigantamax single-strike",
-            "gigantamax rapid-strike"
+            "single strike",
+            "rapid strike",
+            "single strike gigantamax",
+            "rapid strike gigantamax"
         ]
     },
     {
@@ -7485,7 +7485,7 @@
         "name": "enamorus",
         "genderRate": 8,
         "forms": [
-            "normal",
+            "incarnate",
             "therian"
         ]
     },
@@ -7647,7 +7647,7 @@
         "genderRate": -1,
         "forms": [
             "normal",
-            "family-of-three"
+            "family of three"
         ]
     },
     {
@@ -7696,9 +7696,9 @@
         "genderRate": 4,
         "forms": [
             "normal",
-            "blue-plumage",
-            "yellow-plumage",
-            "white-plumage"
+            "blue plumage",
+            "yellow plumage",
+            "white plumage"
         ]
     },
     {
@@ -8110,7 +8110,7 @@
         "genderRate": 4,
         "forms": [
             "normal",
-            "three-segment"
+            "three segment"
         ]
     },
     {
@@ -8312,10 +8312,10 @@
         "genderRate": -1,
         "forms": [
             "normal",
-            "limited-build",
-            "sprinting-build",
-            "swimming-build",
-            "gliding-build"
+            "limited build",
+            "sprinting build",
+            "swimming build",
+            "gliding build"
         ]
     },
     {
@@ -8324,10 +8324,10 @@
         "genderRate": -1,
         "forms": [
             "normal",
-            "low-power-mode",
-            "drive-mode",
-            "aquatic-mode",
-            "glide-mode"
+            "low power mode",
+            "drive mode",
+            "aquatic mode",
+            "glide mode"
         ]
     },
     {

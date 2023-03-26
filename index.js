@@ -92,8 +92,8 @@ async function removeDeadChannels() {
 }
 
 
-function capitalize([first, ...rest]) {
-    return first.toUpperCase() + rest.join('')
+function capitalize(str) {
+    return str.replace(/ S/g, t => t.toUpperCase())
 }
 
 function wrapInUserTags(character) {
