@@ -93,7 +93,11 @@ async function removeDeadChannels() {
 
 
 function capitalize(str) {
-    return str.replace(/ S/g, t => t.toUpperCase())
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+function titleCase(str) {
+    return str.split(' ').map(capitalize).join(' ')
 }
 
 function wrapInUserTags(character) {
@@ -219,7 +223,7 @@ function getPokemonGender(rate) {
 function getPokemon(channel, character) {
     const pokemon = getRandom(allPokemon)
     const form = getRandom(pokemon.forms)
-    const result = boldText(`${getPokemonGender(pokemon.genderRate)} ${form == 'normal' ? '' : color(capitalize(form), 'yellow') + ' '}${capitalize(pokemon.name)}`)
+    const result = boldText(`${getPokemonGender(pokemon.genderRate)} ${form == 'normal' ? '' : color(titleCase(form), 'yellow') + ' '}${titleCase(pokemon.name)}`)
     const prefixes = ['How about', 'Maybe', 'Try', 'Perhaps', 'Ever thought about', 'Why not']
     sendMSG(channel, `${getRandom(prefixes)} ${result}, ${wrapInUserTags(character)}?`)
 }
