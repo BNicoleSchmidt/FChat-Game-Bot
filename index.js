@@ -467,7 +467,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
     } else if (xmessage === '!leve') {
         const leveType = getRandom(['escort', 'hunt', 'eliminate'])
         if (leveType === 'hunt') {
-            sendMSG(channel, color(`Hunt down and harvest the needed materials from ${boldText(randomNumber(12) + ' ' +getRandomItem('enemy'))} for the ${getRandomItem('race')} ${getRandomItem('occupation')} who needs them.`, 'yellow'))
+            sendMSG(channel, color(`Hunt down and harvest the required materials from ${boldText(randomNumber(12) + ' ' +getRandomItem('enemy'))} for the ${getRandomItem('race')} ${getRandomItem('occupation')} who needs them.`, 'yellow'))
         } else if (leveType === 'eliminate') {
             sendMSG(channel, color(`Eliminate ${boldText(randomNumber(12) + ' ' + getRandomItem('enemy'))} for the ${getRandomItem('race')} ${getRandomItem('occupation')} who is being ${getRandom(['threatened', 'harassed', 'mildly inconvenienced'])} by them.`, 'yellow'))
         } else if (leveType === 'escort') {
