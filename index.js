@@ -325,14 +325,26 @@ function disgaeaQuest(channel) {
     const questgiverClass = getRandom(disgaea.classes.filter(c => !c.enemy))
     const targetClass = getRandom(disgaea.classes.filter(c => !c.ally))
     const targetName = `${getDisgaeaName(targetClass)} the ${boldText(targetClass.class)}`
+    const weaponTypes = ['axe', 'sword', 'gun', 'spear', 'staff', 'bow', 'glove']
+    const location = getRandom(disgaea.locations)
     const quest = getRandom([
         ...questgiverClass.quests,
-        `I lost my favorite ${getRandom(['axe', 'sword', 'gun', 'spear', 'staff', 'bow', 'glove'])} at ${getRandom(disgaea.locations)}. Get it back!`,
+        `I lost my favorite ${getRandom(weaponTypes)} at ${location}. Get it back!`,
         `${targetName} stole my dessert! Make them pay!`,
-        `Help me get to ${getRandom(disgaea.locations)}! I need to stop ${targetName}!`,
+        `Help me get to ${location}! I need to stop ${targetName}!`,
         `${targetName} insulted me. I won't stand for it! Grind them into dust!`,
-        `I heard the notorious criminal, ${targetName}, was hiding at ${getRandom(disgaea.locations)}.`,
-        `Protect me from ${targetName}! I'm begging you!`
+        `I heard the notorious criminal, ${targetName}, was hiding at ${location}.`,
+        `Protect me from ${targetName}! I'm begging you!`,
+        `I just got this shiny new ${getRandom(weaponTypes)} from the RosenQueen store! Can you please take it to the Item World and level it up?`,
+        `I need a courier, urgently! Deliver this package to ${targetName} at ${location}!`,
+        `Help, my pet ${targetClass.class} is stuck in a tree!`,
+        `Some vandals have placed geo panels in ${location}, blocking up road construction. Please remove them!`,
+        `Nothing drives down housing prices like a good old fashioned nether war, except of course a biblical plague. Anyway please go to ${location} and start some trouble.`,
+        `The stars are right! The time of my ascension is now at hand! I need you to go to ${location} and perform the nescessary rites. Then you shall be rewarded.`,
+        `I'm here to inform you that the Assembly is looking for some temp hires. Please go to ${location} and survey the area.`,
+        `Hey there, cutie! Looking for a good time? I'm hosting a blind date to all you cuties and studs out there at ${location}, make sure you're dressed for a wild party~♥`,
+        `Help! The Innocents have escaped the innocent farm! They were last seen in ${location}. Please make sure they're not hurt!`,
+        `A fashion emergency is underway! Baggy pants, dull suits, and sightings of sandals with socks! I'm deputizing whoever is receiving this message. Go to ${location} and get a delivery of fashionable clothes, and then distribute them to the population of ${getRandom(disgaea.locations)} whether they like it or not!`
     ])
     sendMSG(channel, `${boldText(color('A quest on the board reads:', 'yellow'))}
         ${quest}
