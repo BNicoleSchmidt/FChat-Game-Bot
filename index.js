@@ -2,7 +2,6 @@ const startDate = new Date()
 const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
 const random = require("./random");
-const allPokemon = require("./pokemon");
 const { Model } = require('objection');
 
 class Player extends Model {
@@ -221,6 +220,7 @@ function getPokemonGender(rate) {
 }
 
 function getPokemon(channel, character) {
+    const allPokemon = require("./pokemon");
     const pokemon = getRandom(allPokemon)
     const form = getRandom(pokemon.forms)
     const result = boldText(`${getPokemonGender(pokemon.genderRate)} ${form == 'normal' ? '' : color(titleCase(form), 'yellow') + ' '}${titleCase(pokemon.name)}`)
@@ -315,6 +315,31 @@ function deathRoll(message, character, channel) {
     }
 }
 
+function getDisgaeaName(dclass) {
+    const disgaeaNames = require("./disgaea-names");
+    return boldText(dclass.uniqueNames ? getRandom(dclass.uniqueNames) : getRandom(disgaeaNames))
+}
+
+function disgaeaQuest(channel) {
+    const disgaea = require("./disgaea");
+    const questgiverClass = getRandom(disgaea.classes.filter(c => !c.enemy))
+    const targetClass = getRandom(disgaea.classes.filter(c => !c.ally))
+    const targetName = `${getDisgaeaName(targetClass)} the ${boldText(targetClass.class)}`
+    const quest = getRandom([
+        ...questgiverClass.quests,
+        `I lost my favorite ${getRandom(['axe', 'sword', 'gun', 'spear', 'staff', 'bow', 'glove'])} at ${getRandom(disgaea.locations)}. Get it back!`,
+        `${targetName} stole my dessert! Make them pay!`,
+        `Help me get to ${getRandom(disgaea.locations)}! I need to stop ${targetName}!`,
+        `${targetName} insulted me. I won't stand for it! Grind them into dust!`,
+        `I heard the notorious criminal, ${targetName}, was hiding at ${getRandom(disgaea.locations)}.`,
+        `Protect me from ${targetName}! I'm begging you!`
+    ])
+    sendMSG(channel, `${boldText(color('A quest on the board reads:', 'yellow'))}
+        ${quest}
+            -- ${getDisgaeaName(questgiverClass)} the ${boldText(questgiverClass.class)}`
+    )
+}
+
 fchat.onOpen(ticket => {
     console.log(`Websocket connection opened. Identifying with ticket: ${ticket}`);
 });
@@ -338,7 +363,7 @@ fchat.on("CON", async () => {
     for (const channel of channels) {
         fchat.send('JCH', {channel: channel.id})
     }
-    setTimeout(removeDeadChannels, 5 * 60 * 1000)
+    setTimeout(removeDeadChannels, 15 * 60 * 1000)
 })
 
 fchat.on("JCH", async ({ channel, character, title }) => {
@@ -394,6 +419,7 @@ const helpText = `List of available commands:
         ${formatCommands(['!pokemon'])}: Get a random pokemon (Includes gender and form suggestions)
         ${formatCommands(['!beef'])}: Generate a beefy name ([url=https://www.youtube.com/watch?v=RFHlJ2voJHY]Big McLargehuge![/url])
         ${formatCommands(['!leve'])}: Get a random leve (FFXIV quest)
+        ${formatCommands(['!dquest'])}: Get a random Disgaea quest
         ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
         ${formatCommands(drRuleCommands)}: Show rules for Death Roll
         ${formatCommands(helpCommands)}: Show this message`
@@ -483,6 +509,8 @@ fchat.on("MSG", async ({ character, message, channel }) => {
         deathRoll(xmessage, character, channel)
     } else if (xmessage === '!418') {
         sendMSG(channel, teapot)
+    } else if (xmessage === '!dquest') {
+        disgaeaQuest(channel)
     } else if (badBotRegex.test(xmessage) || goodBotRegex.test(xmessage)) {
         sendMSG(channel, `/me is a ${boldText('very good')} bot.`)
     } else if (character === 'Athena Esparza') {

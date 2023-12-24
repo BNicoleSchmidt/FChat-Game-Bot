@@ -1,0 +1,1206 @@
+{
+    "classes": [
+        {
+            "class": "Warrior",
+            "quests": []
+        },
+        {
+            "class": "Valkyrie",
+            "quests": []
+        },
+        {
+            "class": "Martial Artist",
+            "quests": []
+        },
+        {
+            "class": "Fight Mistress",
+            "quests": []
+        },
+        {
+            "class": "Magician",
+            "quests": []
+        },
+        {
+            "class": "Witch",
+            "quests": []
+        },
+        {
+            "class": "Clergy",
+            "quests": []
+        },
+        {
+            "class": "Cleric",
+            "quests": []
+        },
+        {
+            "class": "Ninja",
+            "quests": []
+        },
+        {
+            "class": "Kunoichi",
+            "quests": []
+        },
+        {
+            "class": "Male Samurai",
+            "quests": []
+        },
+        {
+            "class": "Lady Samurai",
+            "quests": []
+        },
+        {
+            "class": "Ranger",
+            "quests": []
+        },
+        {
+            "class": "Archer",
+            "quests": []
+        },
+        {
+            "class": "Magic Knight",
+            "quests": []
+        },
+        {
+            "class": "Male Thief",
+            "quests": []
+        },
+        {
+            "class": "Female Thief",
+            "quests": []
+        },
+        {
+            "class": "Male Angel",
+            "quests": []
+        },
+        {
+            "class": "Female Angel",
+            "quests": []
+        },
+        {
+            "class": "Gunner",
+            "quests": []
+        },
+        {
+            "class": "Gunslinger",
+            "quests": []
+        },
+        {
+            "class": "Beastmaster",
+            "quests": []
+        },
+        {
+            "class": "Heavy Knight",
+            "quests": []
+        },
+        {
+            "class": "Armor Knight",
+            "quests": []
+        },
+        {
+            "class": "Sorceror",
+            "quests": []
+        },
+        {
+            "class": "Masked Hero",
+            "quests": []
+        },
+        {
+            "class": "Onmyo Monk",
+            "quests": []
+        },
+        {
+            "class": "Professor",
+            "quests": []
+        },
+        {
+            "class": "Psychic",
+            "quests": []
+        },
+        {
+            "class": "Mecha Girl",
+            "quests": []
+        },
+        {
+            "class": "Geomancer",
+            "quests": []
+        },
+        {
+            "class": "Majin",
+            "quests": []
+        },
+        {
+            "class": "Strider",
+            "quests": []
+        },
+        {
+            "class": "EDF Soldier",
+            "quests": []
+        },
+        {
+            "class": "Cheerleader",
+            "quests": []
+        },
+        {
+            "class": "Brute Warrior",
+            "quests": []
+        },
+        {
+            "class": "Bouncer",
+            "quests": []
+        },
+        {
+            "class": "Battle Suit",
+            "quests": []
+        },
+        {
+            "class": "Android",
+            "quests": []
+        },
+        {
+            "class": "Necromancer",
+            "quests": []
+        },
+        {
+            "class": "Medic",
+            "quests": []
+        },
+        {
+            "class": "Maid",
+            "quests": []
+        },
+        {
+            "class": "Wrestler",
+            "quests": []
+        },
+        {
+            "class": "Pirate",
+            "quests": []
+        },
+        {
+            "class": "Dark Knight",
+            "quests": []
+        },
+        {
+            "class": "Sage",
+            "quests": []
+        },
+        {
+            "class": "Prinny",
+            "quests": []
+        },
+        {
+            "class": "Spirit",
+            "quests": []
+        },
+        {
+            "class": "Undead",
+            "quests": []
+        },
+        {
+            "class": "Dragon",
+            "quests": []
+        },
+        {
+            "class": "Golem",
+            "quests": []
+        },
+        {
+            "class": "Lantern",
+            "quests": []
+        },
+        {
+            "class": "Living Armor",
+            "quests": []
+        },
+        {
+            "class": "Felynn",
+            "quests": []
+        },
+        {
+            "class": "Succubus",
+            "quests": []
+        },
+        {
+            "class": "Gargoyle",
+            "quests": []
+        },
+        {
+            "class": "Nether Noble",
+            "quests": []
+        },
+        {
+            "class": "Great Wyrm",
+            "quests": []
+        },
+        {
+            "class": "Orc",
+            "quests": []
+        },
+        {
+            "class": "Winged Warrior",
+            "quests": []
+        },
+        {
+            "class": "Flora Beast",
+            "quests": []
+        },
+        {
+            "class": "Roc",
+            "quests": []
+        },
+        {
+            "class": "Dragon Zombie",
+            "quests": []
+        },
+        {
+            "class": "Wood Golem",
+            "quests": []
+        },
+        {
+            "class": "Rifle Demon",
+            "quests": []
+        },
+        {
+            "class": "Sludge",
+            "quests": []
+        },
+        {
+            "class": "Shroom",
+            "quests": []
+        },
+        {
+            "class": "Mystic Beast",
+            "quests": []
+        },
+        {
+            "class": "Slumber Cat",
+            "quests": []
+        },
+        {
+            "class": "Reaper",
+            "quests": []
+        },
+        {
+            "class": "Deathsaber",
+            "quests": []
+        },
+        {
+            "class": "Horseman",
+            "quests": []
+        },
+        {
+            "class": "Evil Eye",
+            "quests": []
+        },
+        {
+            "class": "Pincer Shell",
+            "quests": []
+        },
+        {
+            "class": "Sea Angel",
+            "quests": []
+        },
+        {
+            "class": "Marionette",
+            "quests": []
+        },
+        {
+            "class": "Aqua Demon",
+            "quests": []
+        },
+        {
+            "class": "Holy Dragon",
+            "quests": []
+        },
+        {
+            "class": "Faery",
+            "quests": []
+        },
+        {
+            "class": "Beast",
+            "quests": []
+        },
+        {
+            "class": "Shadow",
+            "quests": []
+        },
+        {
+            "class": "Treant",
+            "quests": []
+        },
+        {
+            "class": "Galactic Demon",
+            "quests": []
+        },
+        {
+            "class": "Nosferatu",
+            "quests": []
+        },
+        {
+            "class": "Fire Demon",
+            "quests": []
+        },
+        {
+            "class": "Imp",
+            "quests": []
+        },
+        {
+            "class": "Fairy",
+            "quests": []
+        },
+        {
+            "class": "Rabbit",
+            "quests": []
+        },
+        {
+            "class": "Chimera",
+            "quests": []
+        },
+        {
+            "class": "Bear",
+            "quests": []
+        },
+        {
+            "class": "Nine-Tails",
+            "quests": []
+        },
+        {
+            "class": "Twin Dragon",
+            "quests": []
+        },
+        {
+            "class": "Overlord",
+            "quests": [],
+            "uniqueNames": ["Laharl"]
+        },
+        {
+            "class": "Beauty Queen",
+            "quests": [],
+            "uniqueNames": ["Etna"]
+        },
+        {
+            "class": "Angel Trainee",
+            "quests": [],
+            "uniqueNames": ["Flonne"]
+        },
+        {
+            "class": "Fallen Angel",
+            "quests": [],
+            "uniqueNames": ["Flonne"]
+        },
+        {
+            "class": "Defender of Earth",
+            "quests": [],
+            "uniqueNames": ["Captain Gordon"]
+        },
+        {
+            "class": "Sidekick",
+            "quests": [],
+            "uniqueNames": ["Jennifer"]
+        },
+        {
+            "class": "Super Robot",
+            "quests": [],
+            "uniqueNames": ["Thursday"]
+        },
+        {
+            "class": "Rival",
+            "quests": [],
+            "uniqueNames": ["Kurtis"]
+        },
+        {
+            "class": "Necromancer",
+            "quests": [],
+            "uniqueNames": ["Aramis"]
+        },
+        {
+            "class": "Noble Demon",
+            "quests": [],
+            "uniqueNames": ["Antoire"]
+        },
+        {
+            "class": "Rich Demon",
+            "quests": [],
+            "uniqueNames": ["Hoggmeiser"]
+        },
+        {
+            "class": "Seraph",
+            "quests": [],
+            "uniqueNames": ["Lamington"]
+        },
+        {
+            "class": "Spear",
+            "quests": [],
+            "uniqueNames": ["Longinus"]
+        },
+        {
+            "class": "EDF General",
+            "quests": [],
+            "uniqueNames": ["Carter"]
+        },
+        {
+            "class": "Prism Ranger",
+            "quests": [],
+            "uniqueNames": ["Prism Red", "Prism Blue", "Prism Green", "Prism Yellow", "Prism Purple", "Prism Indigo", "Prism Orange"]
+        },
+        {
+            "class": "Demon Hunter",
+            "quests": [],
+            "uniqueNames": ["Adell"]
+        },
+        {
+            "class": "Princess",
+            "quests": [],
+            "uniqueNames": ["Rozalin"]
+        },
+        {
+            "class": "Dirty Frog",
+            "quests": [],
+            "uniqueNames": ["Tink"]
+        },
+        {
+            "class": "Demon Lord",
+            "quests": [],
+            "uniqueNames": ["Hanako"]
+        },
+        {
+            "class": "Rozy's Slave",
+            "quests": [],
+            "uniqueNames": ["Taro"]
+        },
+        {
+            "class": "Snow Clan Kunoichi",
+            "quests": [],
+            "uniqueNames": ["Yukimaru"]
+        },
+        {
+            "class": "Ninja Master",
+            "quests": [],
+            "uniqueNames": ["Fubuki"]
+        },
+        {
+            "class": "Summoner",
+            "quests": [],
+            "uniqueNames": ["Adell's Mom"]
+        },
+        {
+            "class": "Demon",
+            "quests": [],
+            "uniqueNames": ["Adell's Dad"]
+        },
+        {
+            "class": "Main Character",
+            "quests": [],
+            "uniqueNames": ["Asagi"]
+        },
+        {
+            "class": "Director",
+            "quests": [],
+            "uniqueNames": ["Director"]
+        },
+        {
+            "class": "Evil Ranger",
+            "quests": [],
+            "uniqueNames": ["Pink"]
+        },
+        {
+            "class": "Masochist",
+            "quests": [],
+            "uniqueNames": ["Main Hero B"]
+        },
+        {
+            "class": "Evil Academy Chairman",
+            "quests": [],
+            "uniqueNames": ["Mao"]
+        },
+        {
+            "class": "No. 1 Delinquent",
+            "quests": [],
+            "uniqueNames": ["Raspberyl"]
+        },
+        {
+            "class": "Hero",
+            "quests": [],
+            "uniqueNames": ["Almaz"]
+        },
+        {
+            "class": "Robust Princess",
+            "quests": [],
+            "uniqueNames": ["Sapphire"]
+        },
+        {
+            "class": "Home Ec Teacher",
+            "quests": [],
+            "uniqueNames": ["Mr. Champloo"]
+        },
+        {
+            "class": "Sophomore Leader",
+            "quests": [],
+            "uniqueNames": ["Master Big Star"]
+        },
+        {
+            "class": "Diez Gentleman",
+            "quests": [],
+            "uniqueNames": ["Salvatore"]
+        },
+        {
+            "class": "Academy Delinquent",
+            "quests": [],
+            "uniqueNames": ["Asuka Cranekick", "Kyouko Needleworker"]
+        },
+        {
+            "class": "Majin Academy President",
+            "quests": [],
+            "uniqueNames": ["Stella"]
+        },
+        {
+            "class": "Transfer Student",
+            "quests": [],
+            "uniqueNames": ["Rutile"]
+        },
+        {
+            "class": "Prinny Instructor",
+            "quests": [],
+            "uniqueNames": ["Valvatorez"]
+        },
+        {
+            "class": "Steward",
+            "quests": [],
+            "uniqueNames": ["Fenrich"]
+        },
+        {
+            "class": "Angel of Avarice",
+            "quests": [],
+            "uniqueNames": ["Artina"]
+        },
+        {
+            "class": "Death",
+            "quests": [],
+            "uniqueNames": ["Emizel"]
+        },
+        {
+            "class": "Unprinny",
+            "quests": [],
+            "uniqueNames": ["Fuka"]
+        },
+        {
+            "class": "Final Boss",
+            "quests": [],
+            "uniqueNames": ["Desco"]
+        },
+        {
+            "class": "Mechanician",
+            "quests": [],
+            "uniqueNames": ["Nagi Clockwork"]
+        },
+        {
+            "class": "Netherworld President",
+            "quests": [],
+            "uniqueNames": ["Hugo"]
+        },
+        {
+            "class": "Mad Scientist",
+            "quests": [],
+            "uniqueNames": ["Genjuro"]
+        },
+        {
+            "class": "Cryo Blood Overlord",
+            "quests": [],
+            "uniqueNames": ["Killia"]
+        },
+        {
+            "class": "Gorgeous Overlord",
+            "quests": [],
+            "uniqueNames": ["Seraphina"]
+        },
+        {
+            "class": "Sorching Flame Overlord",
+            "quests": [],
+            "uniqueNames": ["Red Magnus"]
+        },
+        {
+            "class": "Toto Bunny Overlord",
+            "quests": [],
+            "uniqueNames": ["Usalia"]
+        },
+        {
+            "class": "Certain Giant Overlord",
+            "quests": [],
+            "uniqueNames": ["Christo"]
+        },
+        {
+            "class": "Quick Draw Overlord",
+            "quests": [],
+            "uniqueNames": ["Zeroken"]
+        },
+        {
+            "class": "Scorching Flame Resident",
+            "quests": [],
+            "uniqueNames": ["Panchos"]
+        },
+        {
+            "class": "Zombie",
+            "quests": [],
+            "uniqueNames": ["Zed", "Bieko"]
+        },
+        {
+            "class": "Prism Overlord",
+            "quests": [],
+            "uniqueNames": ["Ivar"]
+        },
+        {
+            "class": "Zombie Dog",
+            "quests": [],
+            "uniqueNames": ["Cerberus"]
+        },
+        {
+            "class": "Witch",
+            "quests": [],
+            "uniqueNames": ["Majolene"]
+        },
+        {
+            "class": "King",
+            "quests": [],
+            "uniqueNames": ["Miseador"]
+        },
+        {
+            "class": "Princess",
+            "quests": [],
+            "uniqueNames": ["Melodia"]
+        },
+        {
+            "class": "Human",
+            "quests": [],
+            "uniqueNames": ["Piyori Nijino"]
+        },
+        {
+            "class": "Mid-Boss",
+            "quests": [],
+            "uniqueNames": ["Mid-Boss"],
+            "enemy": true
+        },
+        {
+            "class": "Dark Adonis",
+            "quests": [],
+            "uniqueNames": ["Mid-Boss"],
+            "enemy": true
+        },
+        {
+            "class": "Dark Hero",
+            "quests": [],
+            "uniqueNames": ["Axel"],
+            "enemy": true
+        },
+        {
+            "class": "Disgraced Archangel",
+            "quests": [],
+            "uniqueNames": ["Vulcanus"],
+            "enemy": true
+        },
+        {
+            "class": "God of Overlords",
+            "quests": [],
+            "uniqueNames": ["Zenon"],
+            "enemy": true
+        },
+        {
+            "class": "Super Hero",
+            "quests": [],
+            "uniqueNames": ["Aurum"],
+            "enemy": true
+        },
+        {
+            "class": "Judge",
+            "quests": [],
+            "uniqueNames": ["Nemo"],
+            "enemy": true
+        },
+        {
+            "class": "Demon Emperor",
+            "quests": [],
+            "uniqueNames": ["Void Dark"],
+            "enemy": true
+        },
+        {
+            "class": "Final Boss",
+            "quests": [],
+            "uniqueNames": ["Darkdeath Evilman"],
+            "enemy": true
+        },
+        {
+            "class": "Item World Boss",
+            "quests": [],
+            "uniqueNames": ["Proto Darkdeath"],
+            "enemy": true
+        },
+        {
+            "class": "Chara World Boss",
+            "quests": [],
+            "uniqueNames": ["Ms. Evil"],
+            "enemy": true
+        },
+        {
+            "class": "Lucky Board",
+            "quests": [],
+            "uniqueNames": ["EXP Guy", "Mana Guy", "HL Guy"],
+            "enemy": true
+        },
+        {
+            "class": "Bottlemail",
+            "quests": [],
+            "uniqueNames": ["Special Delivery"],
+            "enemy": true
+        },
+        {
+            "class": "Clergy",
+            "quests": [],
+            "uniqueNames": ["Anti-Messiah"],
+            "enemy": true
+        },
+        {
+            "class": "Devilish Twerp",
+            "quests": [],
+            "uniqueNames": ["Xip"],
+            "enemy": true
+        },
+        {
+            "class": "Gunslinger",
+            "quests": [],
+            "uniqueNames": ["Vinny"],
+            "enemy": true
+        },
+        {
+            "class": "Bottlemail",
+            "quests": [],
+            "uniqueNames": ["Special Delivery"],
+            "enemy": true
+        },
+        {
+            "class": "Mascot",
+            "quests": [],
+            "uniqueNames": ["Pleinair"],
+            "ally": true
+        },
+        {
+            "class": "Overlord",
+            "quests": [],
+            "uniqueNames": ["Priere"],
+            "ally": true
+        },
+        {
+            "class": "Item Worlder",
+            "quests": [],
+            "uniqueNames": ["Mr. Egg"],
+            "ally": true
+        },
+        {
+            "class": "Red Mage",
+            "quests": ["Get me some sweets!"],
+            "uniqueNames": ["Sally"],
+            "ally": true
+        },
+        {
+            "class": "Archer Senator",
+            "quests": [],
+            "uniqueNames": ["Kimberley"],
+            "ally": true
+        },
+        {
+            "class": "Master Thief",
+            "quests": [],
+            "uniqueNames": ["Momoko"],
+            "ally": true
+        },
+        {
+            "class": "Forest Fae",
+            "quests": [],
+            "uniqueNames": ["Robin"],
+            "ally": true
+        },
+        {
+            "class": "Human",
+            "quests": [],
+            "uniqueNames": ["Ari"],
+            "ally": true
+        },
+        {
+            "class": "Armor Knight",
+            "quests": [],
+            "uniqueNames": ["Violet"],
+            "ally": true
+        },
+        {
+            "class": "Shaman",
+            "quests": [],
+            "uniqueNames": ["Yasumi"],
+            "ally": true
+        },
+        {
+            "class": "Valkyrie",
+            "quests": [],
+            "uniqueNames": ["Alessa"],
+            "ally": true
+        },
+        {
+            "class": "Supreme Clergy",
+            "quests": [],
+            "uniqueNames": ["Anti-Messiah"],
+            "ally": true
+        },
+        {
+            "class": "Cheat Shop Healer",
+            "quests": [],
+            "uniqueNames": ["Tatiana"],
+            "ally": true
+        },
+        {
+            "class": "Strider",
+            "quests": [],
+            "uniqueNames": ["Eddie"],
+            "ally": true
+        },
+        {
+            "class": "Zombie",
+            "quests": [],
+            "uniqueNames": ["Ralph"],
+            "ally": true
+        },
+        {
+            "class": "Landlord",
+            "quests": [],
+            "uniqueNames": ["Big T."],
+            "ally": true
+        },
+        {
+            "class": "Blue Mage",
+            "quests": [],
+            "uniqueNames": ["Kiwi the Destroyer"],
+            "ally": true
+        },
+        {
+            "class": "Green Mage",
+            "quests": ["Find and subdue a new husband for me!"],
+            "uniqueNames": ["Grandma"],
+            "ally": true
+        },
+        {
+            "class": "Magic Knight",
+            "quests": [],
+            "uniqueNames": ["Serina"],
+            "ally": true
+        },
+        {
+            "class": "Bunny Lich",
+            "quests": [],
+            "uniqueNames": ["Akiyusa"],
+            "ally": true
+        },
+        {
+            "class": "Bunny Overlord",
+            "quests": [],
+            "uniqueNames": ["Murasaki"],
+            "ally": true
+        },
+        {
+            "class": "Maiden of Carnage",
+            "quests": [],
+            "uniqueNames": ["Fumiko"],
+            "ally": true
+        },
+        {
+            "class": "Red Moon Leader",
+            "quests": [],
+            "uniqueNames": ["Wolfrik"],
+            "ally": true
+        },
+        {
+            "class": "Studious Skull",
+            "quests": [],
+            "uniqueNames": ["Connor"],
+            "ally": true
+        },
+        {
+            "class": "Slumber Cat",
+            "quests": [],
+            "uniqueNames": ["Operation Catsaber"],
+            "ally": true
+        },
+        {
+            "class": "Dark Assembly Maid",
+            "quests": [],
+            "uniqueNames": ["Roxanne"],
+            "ally": true
+        },
+        {
+            "class": "Lampad",
+            "quests": [],
+            "uniqueNames": ["Clownpiece"],
+            "ally": true
+        },
+        {
+            "class": "Healer",
+            "quests": [],
+            "uniqueNames": ["Yarri"],
+            "ally": true
+        },
+        {
+            "class": "Awesome Tomboy Adventurer",
+            "quests": [],
+            "uniqueNames": ["Ramina"],
+            "ally": true
+        },
+        {
+            "class": "Fox",
+            "quests": [],
+            "uniqueNames": ["Kino", "Kohaku"],
+            "ally": true
+        }
+    ],
+    "locations": [
+        "Reflection Pond",
+        "Psycho's Hideout",
+        "Dead Tree Field",
+        "Zenon's Palace",
+        "Murderer's Vault",
+        "Poisonous Swamp",
+        "Dangerous Refuge",
+        "Corpse Garden",
+        "Tragedyland",
+        "Dallos River",
+        "Bloody Valley",
+        "Red Waterfall",
+        "Dragon's Mouth",
+        "Cavern of Evil",
+        "Glutton's Hideout",
+        "Eternal Oblivion",
+        "Shriek of Death",
+        "Dark Ruins",
+        "Battle Arena",
+        "Colosseum Depths",
+        "Sunken Altar",
+        "Hades Corridor",
+        "Loser's Gallows",
+        "Confession Room",
+        "Putrid Courtroom",
+        "Alche City",
+        "Dead Metropolis",
+        "Grave of Alchemy",
+        "Altered Town",
+        "Snarling Capital",
+        "Carcassed Lands",
+        "Rotten Fields",
+        "Luring Nightmare",
+        "Rebelling Spirit",
+        "Dead Breath",
+        "Shinra Tower",
+        "Holy Tower",
+        "Zenon's Castle",
+        "Killers' Hall",
+        "Viewing Room",
+        "Cave of Ordeals",
+        "Holt Village",
+        "Makai Filming",
+        "Oriental Hotel",
+        "Dissection Show",
+        "Orphanage",
+        "Heart Vault",
+        "Dragon's Rest",
+        "Home Ec. Kitchen",
+        "Eternal Teardrop",
+        "No Running Hallway",
+        "Organized Corridor",
+        "Audio-Visual Room",
+        "Waking Nightmares",
+        "Evil Mind Vortex",
+        "Legendary School",
+        "Pool of Bloody Tears",
+        "House of Ordeals",
+        "Rehabilitation Room",
+        "Reincarnation Site",
+        "Forest of Corpses",
+        "Whispering Curse",
+        "Altar of Waste",
+        "Murder Labyrinth",
+        "Searing Euthanasia",
+        "Vengeful Road",
+        "Forbidden Cell",
+        "Rotten Core",
+        "Scream Park",
+        "Ruin Coaster",
+        "Frantic Wheel",
+        "Murder-Go-Round",
+        "Winter Cemetary",
+        "Oblivion Hill",
+        "Evil Office",
+        "Deadly Elevator",
+        "Gloomy Moon",
+        "3rd Colony",
+        "Parasite Nest",
+        "Dark Mud",
+        "Mt. Ordeal",
+        "Frozen Garrison",
+        "Bridge of Horrors",
+        "Dark Church Hall",
+        "Searing Sandstorm",
+        "Poisondise",
+        "Poison Beach",
+        "Toxic Depot",
+        "Hazardous Highway 4",
+        "Fiendish Dance Floor",
+        "Demunshroom",
+        "Slime Hell",
+        "Icic-Hell",
+        "Freezing Tundra",
+        "Dragon Fang",
+        "Isolation Camp",
+        "Demon Mansion",
+        "Relaxation Shrine",
+        "Sharp Fang Shrine",
+        "Prison of Sacrifice",
+        "Sandcano",
+        "Bloody Quicksand",
+        "Dark Testament",
+        "Scorching Flame",
+        "Land of Rush",
+        "Dissolving Wasteland",
+        "Senseless Lava Flow",
+        "Scorching Heart",
+        "Toto Bunny",
+        "Tranquil Castle Wall",
+        "Carrot Garden",
+        "Compassion Street",
+        "Cooperation Plaza",
+        "Toto Bunny Castle",
+        "Royal Bedroom Foyer",
+        "Overlord's Throne",
+        "Fortress De Gaulle",
+        "Flowerful",
+        "Field of Winds",
+        "Road of Bewilderment",
+        "Hill of Loneliness",
+        "Gorgeous",
+        "Inviolable Entrance",
+        "Hall of the King",
+        "Dark Demise",
+        "Heartbreaking Slope",
+        "Carnage Dimension",
+        "Celestial Hell",
+        "Prinny World",
+        "Human World",
+        "Open Market",
+        "Musical World",
+        "Sunbeam Ruins",
+        "Floating Archipelago",
+        "Mt. Vernal",
+        "TV World",
+        "Research Facility",
+        "Control Room",
+        "Magic School",
+        "Library",
+        "Dining Hall",
+        "Lecture Hall",
+        "Neo-Human World",
+        "Royal Chamber",
+        "Happiness Hills",
+        "Sing-Song Square",
+        "Skydream Street",
+        "Fairy-Tale Fields",
+        "TV-to-Movie World",
+        "Prism Street",
+        "Shipping Yard",
+        "Evil HQ",
+        "Exam Room",
+        "Exam Room II",
+        "Exam Room III",
+        "Zed's World",
+        "Overlord's Keep",
+        "Darkest Assembly",
+        "Grand Staircase",
+        "Gallery of Purgatory",
+        "Icefield World",
+        "Rancorous Ridge",
+        "Miasmic Marsh",
+        "Peaceful World",
+        "Expanse of Solitude",
+        "Shozuka Plains",
+        "Ancient Town",
+        "Hill Fortress",
+        "Harvana",
+        "Martial Dimension",
+        "Rakshasa Dimension",
+        "Transcender's Dimension",
+        "Plains of Grief",
+        "Nameless Wilderness",
+        "Silent Death Land",
+        "Filthy Ruins",
+        "Frozen River",
+        "Ice Demon Grave",
+        "Grosso's Castle",
+        "Sea of Gehenna",
+        "Concert Stage",
+        "Ishtam Devis",
+        "Sinful Road",
+        "Agul Eviland",
+        "Frightening Forest",
+        "Animal Trail to Hell",
+        "Immoral's Haven",
+        "The Fool's Ruins",
+        "Phantom's End",
+        "Crystal Castle",
+        "Vyers Castle",
+        "Corridor of Love",
+        "Hall of Caresses",
+        "Icy Breath",
+        "Eternal Winter",
+        "Dinero Palace",
+        "Golden Courtyard",
+        "Blazing Core",
+        "Road of Flames",
+        "Molten Labyrinth",
+        "Jotunheim",
+        "Blair Forest",
+        "Calamity Woods",
+        "Witches' Den",
+        "Salamander's Breath",
+        "Crimson Plains",
+        "Lunar Snowfield",
+        "Frigid Garden",
+        "Stellar Graveyard",
+        "Valgipus IV",
+        "Thurvean Sector",
+        "Sphere VIII",
+        "Wasteland of Woe",
+        "Forest of the Dead",
+        "Hero's Tomb",
+        "Sidereal Cliff",
+        "Gargantua",
+        "Celestia",
+        "Field of Virtue",
+        "Paradise",
+        "Divine Prison",
+        "Seraphic Sanctuary",
+        "Hall of Justice",
+        "Sacred Altar",
+        "Neo Eden",
+        "Central City",
+        "EDF Headquarters",
+        "Beauty Castle",
+        "Baal Castle",
+        "Primordial Soup",
+        "Hell's Half Acre",
+        "Sally's Cottage",
+        "Kimberley's Tea Plantations",
+        "Shaman Town",
+        "Hades",
+        "Item World",
+        "Chara World",
+        "Veldime",
+        "Pandaemonium",
+        "Phantom Isle",
+        "Pocket Netherworld",
+        "Maritsu Evil Academy",
+        "Former Hell",
+        "Outer Space",
+        "Hell's Half Acre"
+    ]
+}
