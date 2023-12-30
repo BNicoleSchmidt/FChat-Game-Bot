@@ -126,7 +126,27 @@
         "bowl of pumpkin soup",
         "giant eggplant",
         "Cobb salad",
-        "can of green beans"
+        "can of green beans",
+        "bean burrito",
+        "plate of chalupas",
+        "tray of nachos with jalapenos and cheese",
+        "stack of pancakes with maple syrup",
+        "handful of crab rangoon",
+        "bunch of toasted ravioli",
+        "sausage link",
+        "chicken salad sandwich",
+        "baguette",
+        "tempura platter",
+        "beef stroganoff",
+        "pickled herring",
+        "poppyseed bagel",
+        "lemon muffin",
+        "salmon meuniere",
+        "taiyaki pastry",
+        "takoyaki boat",
+        "glazed apple strudel",
+        "bowl of oden",
+        "yogurt parfait"
     ],
     "!berry": [
         "Aguav berry",
@@ -273,7 +293,12 @@
         "frozen lemonade",
         "mint lassi",
         "Hawaiian Punch",
-        "Grimace's Birthday Shake"
+        "Grimace's Birthday Shake",
+        "cinnamon horchata",
+        "rootbeer float",
+        "bubble tea",
+        "sparkling cider",
+        "Mason jar of moonshine"
     ],
     "!potion": [
         "potion of lust",
@@ -322,7 +347,8 @@
         "potion of additional appendages",
         "potion of courage",
         "potion of fear",
-        "potion of telekinesis"
+        "potion of telekinesis",
+        "potion of abundant production"
     ],
     "!toy": [
         "canine dildo with a knot",
@@ -365,7 +391,11 @@
         "feather tickler",
         "riding crop",
         "leather flogger",
-        "speculum"
+        "speculum",
+        "clit suction vibrator",
+        "vibrating prostate massager",
+        "penis pump",
+        "charged e-stim paddle"
     ],
     "!bondage": [
         "pair of wrist cuffs",
@@ -437,7 +467,10 @@
         "police officer's uniform with a badge and paintball pistol",
         "fancy white bridal gown with a veil and bouquet",
         "bunch of mummy wrappings",
-        "grass skirt and coconut bra"
+        "grass skirt and coconut bra",
+        "Santa Claus suit with a fake beard",
+        "lacy pink negligee",
+        "black fishnet bodysuit"
     ],
     "!misc": [
         "tennis ball",
@@ -552,7 +585,24 @@
         "Charlie's Angels DVD",
         "monkey wrench",
         "seashell",
-        "Nokia 3310"
+        "Nokia 3310",
+        "cork",
+        "sewing machine",
+        "set of thieves' tools",
+        "grappling hook",
+        "pepper grinder",
+        "decorative hair comb",
+        "metal detector",
+        "boomerang",
+        "red Christmas ornament",
+        "wrapped present with a bow",
+        "rock",
+        "space heater",
+        "coffin",
+        "sealed, unmarked envelope",
+        "poseable Gumby figurine",
+        "voice changer",
+        "Substitute doll"
     ],
     "!weapon": [
         "squeaky hammer",
@@ -574,7 +624,10 @@
         "feather",
         "horse dildo",
         "bubble gun",
-        "parasol"
+        "parasol",
+        "foam finger",
+        "wet noodle",
+        "pool noodle"
     ],
     "!curse": [
         {"color": "red", "effect": "Pride", "description": "What curse? You're just the fucking best."},
@@ -1298,7 +1351,11 @@
         "explorer",
         "cartographer",
         "prospector",
-        "drunk"
+        "drunk",
+        "fisher",
+        "peddler",
+        "historian",
+        "craftsman"
     ],
     "enemy": [
         "Banshees",
