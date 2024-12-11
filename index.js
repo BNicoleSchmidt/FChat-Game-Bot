@@ -580,6 +580,9 @@ fchat.on('PRI', async ({ character, message }) => {
             for (const channel of channels) {
                 sendMSG(channel.id, boldText('Announcement: ') + announcement)
             }
+        } else if (message.startsWith('!channels')) {
+            const channels = await Channel.query()
+            sendPRI(character, `Channel count: ${channels.length}\n` + channels.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n'))
         } else if (message.startsWith('!leave')) {
             const channel_id = message.substr(7)
             const channel = Channel.query().findById(channel_id)
