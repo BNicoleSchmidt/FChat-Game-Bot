@@ -397,7 +397,7 @@ fchat.on("JCH", async ({ channel, character, title }) => {
 fchat.on("ICH", async({ users, channel }) => {
     if (users.length <= 3) {
         const channelData = await Channel.query().findById(channel)
-        console.log(`Joined channel with ${users.length} characters: ${channelData.title} - ${channel}`)
+        console.log(`Joined channel with ${users.length} characters: ${channelData?.title} - ${channel}`)
     }
 })
 
