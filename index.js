@@ -83,13 +83,19 @@ let isAlive = false
 
 async function removeDeadChannels() {
     const deadChannels = await Channel.query().where({pending: true})
-    const deadChannelIds = deadChannels.map(c => c.id)
-    await Mod.query().delete().whereIn('channel_id', deadChannelIds)
-    await Player.query().delete().whereIn('channel_id', deadChannelIds)
-    await Channel.query().findByIds(deadChannelIds).delete()
+    await leaveChannels(deadChannels, false)
     console.log('Removed dead channels:', JSON.stringify(deadChannels.map(c => c.title)))
 }
 
+async function leaveChannels(channels, log = true) {
+    const channel_ids = channels.map(c => c.id)
+    await Mod.query().delete().whereIn('channel_id', channel_ids)
+    await Player.query().delete().whereIn('channel_id', channel_ids)
+    await Channel.query().findByIds(channel_ids).delete()
+    if (log) {
+        console.log('Left channels:', JSON.stringify(channels.map(c => c.title)))
+    }
+}
 
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -388,8 +394,21 @@ fchat.on("JCH", async ({ channel, character, title }) => {
     }
 })
 
+fchat.on("ICH", async({ users, channel }) => {
+    if (users.length <= 3) {
+        const channelData = await Channel.query().findById(channel)
+        console.log(`Joined channel with ${users.length} characters: ${channelData.title} - ${channel}`)
+    }
+})
+
 fchat.on("LCH", async ({ channel, character }) => {
     await removePlayer(character, channel, true)
+    if (character === 'Game Bot') {
+        const channels = await Channel.query().where('id', channel)
+        if (channels.length) {
+            await leaveChannels(channels)
+        }
+    }
 })
 
 fchat.on("FLN", async ({ character }) => {
@@ -560,6 +579,15 @@ fchat.on('PRI', async ({ character, message }) => {
             const channels = await Channel.query()
             for (const channel of channels) {
                 sendMSG(channel.id, boldText('Announcement: ') + announcement)
+            }
+        } else if (message.startsWith('!leave')) {
+            const channel_id = message.substr(7)
+            const channel = Channel.query().findById(channel_id)
+            if (channel) {
+                messageQueue.push({ code: 'LCH', payload: { channel: channel_id } })
+                sendPRI(character, `Left channel ${channel.title} ${channel_id} [session]${channel_id}[/session]`)
+            } else {
+                sendPRI(character, `Did not find a channel with ID ${channel_id}`)
             }
         } else if (message.includes('|')) {
             let [channel, command] = message.split('|')
