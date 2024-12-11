@@ -10,9 +10,9 @@ class Player extends Model {
     }
 }
 
-class Item extends Model {
+class Admin extends Model {
     static get tableName() {
-        return 'items'
+        return 'admins'
     }
 }
 
@@ -573,36 +573,39 @@ fchat.on('PRI', async ({ character, message }) => {
         sendPRI(character, drRules)
     } else if (helpCommands.includes(xmessage)) {
         sendPRI(character, helpText)
-    } else if (['Mitena Twoheart', 'Jingly Isabelle', 'Playingway', 'Failenn', 'Lapina Lunara'].includes(character)) {
-        if (message.startsWith('!announce')) {
-            const announcement = message.substr(10)
-            const channels = await Channel.query()
-            for (const channel of channels) {
-                sendMSG(channel.id, boldText('Announcement: ') + announcement)
-            }
-        } else if (message.startsWith('!channels')) {
-            const channels = await Channel.query()
-            sendPRI(character, `Channel count: ${channels.length}\n` + channels.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n'))
-        } else if (message.startsWith('!leave')) {
-            const channel_id = message.substr(7)
-            const channel = Channel.query().findById(channel_id)
-            if (channel) {
-                messageQueue.push({ code: 'LCH', payload: { channel: channel_id } })
-                sendPRI(character, `Left channel ${channel.title} ${channel_id} [session]${channel_id}[/session]`)
-            } else {
-                sendPRI(character, `Did not find a channel with ID ${channel_id}`)
-            }
-        } else if (message.includes('|')) {
-            let [channel, command] = message.split('|')
-            sendMSG(channel, command)
-        } else if (message === '!update') {
-            const channels = await Channel.query()
-            for (const channel of channels) {
-                sendMSG(channel.id, boldText(color('Alert: Incoming update. System will restart soon. Any in-progress Death Rolls will be lost. Truth or Dare games are safe. Restart should take less than five minutes.', 'red')))
-            }
-        }
     } else {
-        sendPRI(character, "Only help commands are valid in private messages. If you would like to access other commands, they must be used in a room.")
+        const admins = (await Admin.query()).map(a => a.name)
+        if (admins.includes(character)) {
+            if (message.startsWith('!announce')) {
+                const announcement = message.substr(10)
+                const channels = await Channel.query()
+                for (const channel of channels) {
+                    sendMSG(channel.id, boldText('Announcement: ') + announcement)
+                }
+            } else if (message.startsWith('!channels')) {
+                const channels = await Channel.query()
+                sendPRI(character, `Channel count: ${channels.length}\n` + channels.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n'))
+            } else if (message.startsWith('!leave')) {
+                const channel_id = message.substr(7)
+                const channel = await Channel.query().findById(channel_id)
+                if (channel) {
+                    messageQueue.push({ code: 'LCH', payload: { channel: channel_id } })
+                    sendPRI(character, `Left channel ${channel.title} ${channel_id} [session]${channel_id}[/session]`)
+                } else {
+                    sendPRI(character, `Did not find a channel with ID ${channel_id}`)
+                }
+            } else if (message.includes('|')) {
+                let [channel, command] = message.split('|')
+                sendMSG(channel, command)
+            } else if (message === '!update') {
+                const channels = await Channel.query()
+                for (const channel of channels) {
+                    sendMSG(channel.id, boldText(color('Alert: Incoming update. System will restart soon. Any in-progress Death Rolls will be lost. Truth or Dare games are safe. Restart should take less than five minutes.', 'red')))
+                }
+            }
+        } else {
+            sendPRI(character, "Only help commands are valid in private messages. If you would like to access other commands, they must be used in a room.")
+        }
     }
 })
 
