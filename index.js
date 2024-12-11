@@ -432,7 +432,7 @@ const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
 
 const teapot = `/me beeps, then spins around in a circle before singing in a tinny, robotic voice. "I'm a little teabot, short and stout. Here is my input, here is my out. When I get all booted up, hear my sound. ERR 404 - LYRIC NOT FOUND."`
 
-const helpText = `List of available commands:
+const helpText = `List of available commands: [spoiler]
         ${formatCommands(joinCommands)}: Join a game
         ${formatCommands(leaveCommands)}: Leave a game
         ${formatCommands(statusCommands)}: Check current players
@@ -453,21 +453,21 @@ const helpText = `List of available commands:
         ${formatCommands(['!dquest'])}: Get a random Disgaea quest
         ${formatCommands(todRuleCommands)}: Show rules for Truth or Dare
         ${formatCommands(drRuleCommands)}: Show rules for Death Roll
-        ${formatCommands(helpCommands)}: Show this message`
-const todRules = `Truth or Dare Rules (And suggestions):
+        ${formatCommands(helpCommands)}: Show this message [/spoiler]`
+const todRules = `Truth or Dare Rules (And suggestions): [spoiler]
         A game requires a minimum of 3 players. If spinback prevention is turned on, this is raised to 4.
         Spinback prevention means that the bottle will not land on the person who spun it last, so the game can't just go back and forth between two players.
         Be respectful of players' orientations, kinks, and room rules. Generally speaking, dares should not include extreme/gross kinks.
         If a player does not respond within 5 minutes, it is okay to skip them and spin again to keep the game moving.
-        In order to keep the game going smoothly and lessen the downtime between spins, it can be helpful to spin the bottle after being told your dare, but before you actually perform it. This gives time for the next player to decide whether to do a Truth or Dare while you are still working on writing out your own actions.`
-const drRules = `Death Roll Rules (And suggestions):
+        In order to keep the game going smoothly and lessen the downtime between spins, it can be helpful to spin the bottle after being told your dare, but before you actually perform it. This gives time for the next player to decide whether to do a Truth or Dare while you are still working on writing out your own actions.[/spoiler]`
+const drRules = `Death Roll Rules (And suggestions): [spoiler]
         A Death Roll can be performed between two or more players.
         Only one Death Roll can be in progress at a time in a channel.
         Usually there are stakes laid out before the rolling begins - a bet between the players that can be nearly anything.
         Commonly, this is simply an order that the winner will give to the loser that they must obey, though the specific order isn't known until after the rolling ends.
         The starting player chooses a number to begin (2-1000) and uses the command ${boldText('!dr 314')} for instance.
         Players then take turns using ${boldText('!dr')} to keep rolling against the previous number rolled.
-        The numbers will gradually go down until a player eventually rolls a ${boldText('1')}. That player loses!`
+        The numbers will gradually go down until a player eventually rolls a ${boldText('1')}. That player loses![/spoiler]`
 
 const badBotRegex = new RegExp(/\bbad bot\b/, 'i')
 const goodBotRegex = new RegExp(/\bgood bot\b/, 'i')
