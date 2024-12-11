@@ -426,7 +426,7 @@ const spinbackCommands = ['!spinback', '!togglespinback']
 const helpCommands = ['!help', '!commands', '!info']
 const randomItemCommands = ['!food', '!berry', '!drink', '!potion', '!costume', '!minion', '!weapon', '!toy', '!bondage', '!misc']
 const randomEffectCommands = ['!curse']
-const todRuleCommands = ['!tod help', '!tod help', '!rulestod', '!rules tod', '!todrules', '!tod rules', '!help tod']
+const todRuleCommands = ['!tod help', '!todhelp', '!rulestod', '!rules tod', '!todrules', '!tod rules', '!help tod']
 const drRuleCommands = ['!dr help', '!drhelp', '!rulesdr', '!drrules', '!rules dr', '!dr rules', '!help dr']
 const coinCommands = ['!coin', '!flip', '!coinflip', '!flipcoin']
 
