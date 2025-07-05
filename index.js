@@ -3,6 +3,8 @@ const Fchat = require("lib-fchat/lib/FchatBasic");
 const config = require("./config");
 const random = require("./random");
 const { Model } = require('objection');
+let leaveUnderCount = 0
+let leaveAdmin = ''
 
 class Player extends Model {
     static get tableName() {
@@ -24,7 +26,7 @@ class Mod extends Model {
 
 class Channel extends Model {
     static get tableName() {
-        return 'channels';
+        return 'channels'
     }
 
     static get relationMappings() {
@@ -418,6 +420,22 @@ fchat.on("FLN", async ({ character }) => {
     }
 })
 
+fchat.on("ORS", async ({ channels }) => {
+    if (leaveUnderCount) {
+        const joinedChannels = (await Channel.query())
+        const channelsToLeave = []
+        for (const joinedChannel of joinedChannels) {
+            const channel = channels.find(c => c.name.toLowerCase() === joinedChannel.id.toLowerCase())
+            if (!channel || channel.characters <= leaveUnderCount) {
+                channelsToLeave.push(joinedChannel)
+            }
+        }
+        await leaveChannels(channelsToLeave)
+        leaveUnderCount = 0
+        sendPRI(leaveAdmin, `Left ${channelsToLeave.length} channels:\n${channelsToLeave.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n')}`)
+    }
+})
+
 const joinCommands = ['!yesspin', '!optin', '!join']
 const leaveCommands = ['!nospin', '!optout', '!leave']
 const statusCommands = ['!ready', '!status', '!players', '!playing', '!list']
@@ -585,6 +603,14 @@ fchat.on('PRI', async ({ character, message }) => {
             } else if (message.startsWith('!channels')) {
                 const channels = await Channel.query()
                 sendPRI(character, `Channel count: ${channels.length}\n` + channels.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n'))
+            } else if (message.startsWith('!leave under')) {
+                    leaveUnderCount = parseInt(message.substr(13), 10)
+                    if (!leaveUnderCount) {
+                        sendPRI(character, 'Must be a number greater than 0')
+                    } else {
+                        leaveAdmin = character
+                        messageQueue.push({ code: 'ORS' })
+                    }
             } else if (message.startsWith('!leave')) {
                 const channel_id = message.substr(7)
                 const channel = await Channel.query().findById(channel_id)
