@@ -84,13 +84,19 @@ const deathRollTracker = {}
 let isAlive = false
 
 async function removeDeadChannels() {
-    const deadChannels = await Channel.query().where({pending: true})
+    const deadChannels = await Channel.query().where({ pending: true })
     await leaveChannels(deadChannels, false)
     console.log('Removed dead channels:', JSON.stringify(deadChannels.map(c => c.title)))
 }
 
-async function leaveChannels(channels, log = true) {
+async function leaveChannels(channels, log = true, sendWarning = false) {
     const channel_ids = channels.map(c => c.id)
+    for (const id of channel_ids) {
+        if (sendWarning) {
+            sendMSG(id, 'Max number of channels has been reached. Game Bot is leaving this channel due to low player count. (Do not try to use this bot to hold channels open.)')
+        }
+        messageQueue.push({ code: 'LCH', payload: { channel: id } })
+    }
     await Mod.query().delete().whereIn('channel_id', channel_ids)
     await Player.query().delete().whereIn('channel_id', channel_ids)
     await Channel.query().findByIds(channel_ids).delete()
@@ -192,7 +198,7 @@ async function updateRoundCounts(channel, players, spunPlayer, spinner) {
     await Player.query()
         .where('channel_id', channel)
         .where('character', spunPlayer)
-        .update({rounds: 0})
+        .update({ rounds: 0 })
 }
 
 async function spin(spinner, channel) {
@@ -207,7 +213,7 @@ async function spin(spinner, channel) {
         const eligiblePlayers = players.filter(c => c.character !== spinner && (!channelInfo.spinback || c.character !== channelInfo.last_spinner))
         const chosenCharacter = getRandom(manipulateBottleOdds(eligiblePlayers))
         sendMSG(channel, `${wrapInUserTags(spinner)} spins the bottle! It points to... ${wrapInUserTags(chosenCharacter)}!`)
-        await Channel.query().findById(channel).update({last_spinner: spinner})
+        await Channel.query().findById(channel).update({ last_spinner: spinner })
         await updateRoundCounts(channel, players, chosenCharacter, spinner)
     }
 }
@@ -369,19 +375,26 @@ fchat.on("IDN", () => {
 });
 
 fchat.on("ERR", event => {
-    console.log('ERR', event)
+    if (event.number === 73) {
+        console.log('Max Channel Error - Leaving empty channels')
+        leaveUnderCount = 2
+        leaveAdmin = 'Mitena Twoheart'
+        messageQueue.push({ code: 'ORS' })
+    } else {
+        console.log('ERR', event)
+    }
 })
 
 fchat.on("CON", async () => {
     fchat.send('STA', {
         status: 'online',
-        statusmsg: `For a list of commands, use ${boldText('!info')}\n` + 
-        `This bot restarts every 24 hours due to Heroku worker limitations. Last restart: ${startDate.toUTCString()}.\n` +
-        `Questions or concerns, please contact ${wrapInUserTags('Mitena Twoheart')} or ${wrapInUserTags('Jingly Isabelle')}.\n`
+        statusmsg: `For a list of commands, use ${boldText('!info')}\n` +
+            `This bot restarts every 24 hours due to Heroku worker limitations. Last restart: ${startDate.toUTCString()}.\n` +
+            `Questions or concerns, please contact ${wrapInUserTags('Mitena Twoheart')} or ${wrapInUserTags('Jingly Isabelle')}.\n`
     })
-    const channels = await Channel.query().update({pending: true}).returning('*')
+    const channels = await Channel.query().update({ pending: true }).returning('*')
     for (const channel of channels) {
-        fchat.send('JCH', {channel: channel.id})
+        fchat.send('JCH', { channel: channel.id })
     }
     setTimeout(removeDeadChannels, 15 * 60 * 1000)
 })
@@ -389,14 +402,21 @@ fchat.on("CON", async () => {
 fchat.on("JCH", async ({ channel, character, title }) => {
     if (character.identity === 'Game Bot') {
         console.log('Joined channel', title)
-        const existing = await Channel.query().findById(channel).update({pending: false})
+        const existing = await Channel.query().findById(channel).update({ pending: false })
         if (!existing) {
-            await Channel.query().insert({id: channel, title})
+            await Channel.query().insert({ id: channel, title })
+            const channels = await Channel.query()
+            if (channels.length >= 75) {
+                console.log('Joined 75 channels. Triggering autoleave.')
+                leaveUnderCount = 2
+                leaveAdmin = 'Mitena Twoheart'
+                messageQueue.push({ code: 'ORS' })
+            }
         }
     }
 })
 
-fchat.on("ICH", async({ users, channel }) => {
+fchat.on("ICH", async ({ users, channel }) => {
     if (users.length <= 3) {
         const channelData = await Channel.query().findById(channel)
         console.log(`Joined channel with ${users.length} characters: ${channelData?.title} - ${channel}`)
@@ -430,9 +450,11 @@ fchat.on("ORS", async ({ channels }) => {
                 channelsToLeave.push(joinedChannel)
             }
         }
-        await leaveChannels(channelsToLeave)
+        if (channelsToLeave.length) {
+            await leaveChannels(channelsToLeave, true, true)
+            sendPRI(leaveAdmin, `Left ${channelsToLeave.length} channels:\n${channelsToLeave.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n')}`)
+        }
         leaveUnderCount = 0
-        sendPRI(leaveAdmin, `Left ${channelsToLeave.length} channels:\n${channelsToLeave.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n')}`)
     }
 })
 
@@ -514,7 +536,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
     } else if (spinbackCommands.includes(xmessage)) {
         const existing = await Channel.query().findById(channel)
         newSetting = !existing.spinback
-        await Channel.query().findById(channel).update({spinback: newSetting})
+        await Channel.query().findById(channel).update({ spinback: newSetting })
         sendMSG(channel, `Spinback prevention is now ${newSetting ? 'on' : 'off'}.`)
     } else if (randomItemCommands.includes(xmessage)) {
         sendMSG(channel, `/me produces a ${boldText(color(getRandomItem(xmessage), 'blue'))}!`)
@@ -542,7 +564,7 @@ fchat.on("MSG", async ({ character, message, channel }) => {
     } else if (xmessage === '!leve') {
         const leveType = getRandom(['escort', 'hunt', 'eliminate'])
         if (leveType === 'hunt') {
-            sendMSG(channel, color(`Hunt down and harvest the required materials from ${boldText(randomNumber(12) + ' ' +getRandomItem('enemy'))} for the ${getRandomItem('race')} ${getRandomItem('occupation')} who needs them.`, 'yellow'))
+            sendMSG(channel, color(`Hunt down and harvest the required materials from ${boldText(randomNumber(12) + ' ' + getRandomItem('enemy'))} for the ${getRandomItem('race')} ${getRandomItem('occupation')} who needs them.`, 'yellow'))
         } else if (leveType === 'eliminate') {
             sendMSG(channel, color(`Eliminate ${boldText(randomNumber(12) + ' ' + getRandomItem('enemy'))} for the ${getRandomItem('race')} ${getRandomItem('occupation')} who is being ${getRandom(['threatened', 'harassed', 'mildly inconvenienced'])} by them.`, 'yellow'))
         } else if (leveType === 'escort') {
@@ -604,18 +626,18 @@ fchat.on('PRI', async ({ character, message }) => {
                 const channels = await Channel.query()
                 sendPRI(character, `Channel count: ${channels.length}\n` + channels.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n'))
             } else if (message.startsWith('!leave under')) {
-                    leaveUnderCount = parseInt(message.substr(13), 10)
-                    if (!leaveUnderCount) {
-                        sendPRI(character, 'Must be a number greater than 0')
-                    } else {
-                        leaveAdmin = character
-                        messageQueue.push({ code: 'ORS' })
-                    }
+                leaveUnderCount = parseInt(message.substr(13), 10)
+                if (!leaveUnderCount) {
+                    sendPRI(character, 'Must be a number greater than 0')
+                } else {
+                    leaveAdmin = character
+                    messageQueue.push({ code: 'ORS' })
+                }
             } else if (message.startsWith('!leave')) {
                 const channel_id = message.substr(7)
                 const channel = await Channel.query().findById(channel_id)
                 if (channel) {
-                    messageQueue.push({ code: 'LCH', payload: { channel: channel_id } })
+                    leaveChannels([channel])
                     sendPRI(character, `Left channel ${channel.title} ${channel_id} [session]${channel_id}[/session]`)
                 } else {
                     sendPRI(character, `Did not find a channel with ID ${channel_id}`)
