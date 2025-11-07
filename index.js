@@ -399,6 +399,14 @@ fchat.on("CON", async () => {
     setTimeout(removeDeadChannels, 15 * 60 * 1000)
 })
 
+fchat.on("CIU", async ({ sender, title, name }) => {
+    console.log(`Invited to ${title} (${name}) by ${sender}`)
+    const existing = await Channel.query().findById(name).update({ invited_by: sender })
+    if (!existing) {
+        await Channel.query().insert({ id: name, title, invited_by: sender })
+    }
+})
+
 fchat.on("JCH", async ({ channel, character, title }) => {
     if (character.identity === 'Game Bot') {
         console.log('Joined channel', title)
@@ -408,7 +416,7 @@ fchat.on("JCH", async ({ channel, character, title }) => {
             const channels = await Channel.query()
             if (channels.length >= 75) {
                 console.log('Joined 75 channels. Triggering autoleave.')
-                leaveUnderCount = 2
+                leaveUnderCount = 4
                 leaveAdmin = 'Mitena Twoheart'
                 messageQueue.push({ code: 'ORS' })
             }
@@ -417,9 +425,17 @@ fchat.on("JCH", async ({ channel, character, title }) => {
 })
 
 fchat.on("ICH", async ({ users, channel }) => {
-    if (users.length <= 3) {
-        const channelData = await Channel.query().findById(channel)
+    const channelData = await Channel.query().findById(channel)
+    if (users.length <= 4 && channelData?.last_user_count <= 4) {
+        leaveChannels([channelData])
         console.log(`Joined channel with ${users.length} characters: ${channelData?.title} - ${channel}`)
+        if (channelData?.invited_by) {
+            sendPRI(channelData?.invited_by, 'F-Chat limits characters to joining 75 rooms.\n' +
+                'Due to a combination of popularity and abuse, Game Bot frequently reaches this limit and is then unable to join new rooms.\n' +
+                'In order to reduce the abuse, Game Bot will no longer be joining private rooms or rooms with fewer than 5 characters. This minimum may be raised if it becomes necessary.')
+        }
+    } else {
+        await Channel.query().findById(channel).update({last_user_count: users.length});
     }
 })
 
@@ -624,7 +640,7 @@ fchat.on('PRI', async ({ character, message }) => {
                 }
             } else if (message.startsWith('!channels')) {
                 const channels = await Channel.query()
-                sendPRI(character, `Channel count: ${channels.length}\n` + channels.map(c => `[session]${c.id}[/session] - ${c.id}`).join('\n'))
+                sendPRI(character, `Channel count: ${channels.length}\n` + channels.map(c => `[session]${c.id}[/session] - ${c.id}${c.invited_by ? ` - Invited by ${c.invited_by}` : ''}`).join('\n'))
             } else if (message.startsWith('!leave under')) {
                 leaveUnderCount = parseInt(message.substr(13), 10)
                 if (!leaveUnderCount) {
